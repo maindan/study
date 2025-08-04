@@ -21,6 +21,11 @@ public class TaskController {
         return  ResponseEntity.ok(taskService.findById(id));
     }
 
+    @PostMapping
+    public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskCreateDTO data) {
+        return ResponseEntity.ok(taskService.create(data));
+    }
+
     @GetMapping
     public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
         return ResponseEntity.ok(taskService.findAll());

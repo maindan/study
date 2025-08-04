@@ -31,6 +31,15 @@ public class TaskService {
         return converteListTaskDTO(tasks);
     }
 
+    public TaskResponseDTO create(TaskCreateDTO data) {
+        Task task = new Task();
+        task.setDescription(data.description());
+        task.setTopic(topicRepository.findById(data.topic_id())
+                .orElseThrow(()-> new EntityNotFoundException("Topic not found")));
+        taskRepository.save(task);
+        return converteTaskDTO(task);
+    }
+
     public TaskResponseDTO update(Long id, TaskCreateDTO data) {
         Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
         Optional.ofNullable(task.getDescription()).ifPresent(task::setDescription);
@@ -48,8 +57,8 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    private TaskResponseDTO converteTaskDTO(Task task) {
-        return new  TaskResponseDTO(
+    public TaskResponseDTO converteTaskDTO(Task task) {
+        return new TaskResponseDTO(
                 task.getId(),
                 task.getDescription(),
                 task.getStatus(),
@@ -59,7 +68,7 @@ public class TaskService {
         );
     }
 
-    private List<TaskResponseDTO> converteListTaskDTO(List<Task> tasks) {
+    public List<TaskResponseDTO> converteListTaskDTO(List<Task> tasks) {
         return tasks.stream()
                 .map(this::converteTaskDTO)
                 .collect(Collectors.toList());

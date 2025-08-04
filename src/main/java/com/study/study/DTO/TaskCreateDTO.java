@@ -6,6 +6,5 @@ public record TaskCreateDTO(
         String description,
         TaskStatus status,
         Long topic_id
-
 ) {
 }
