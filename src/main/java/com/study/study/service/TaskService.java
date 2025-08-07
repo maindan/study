@@ -6,6 +6,7 @@ import com.study.study.model.Task;
 import com.study.study.model.Topic;
 import com.study.study.repository.TaskRepository;
 import com.study.study.repository.TopicRepository;
+import com.study.study.utils.SecurityUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class TaskService {
     private final TaskRepository taskRepository;
     private final TopicRepository topicRepository;
+    private final SecurityUtils securityUtils;
 
     public TaskResponseDTO findById(Long id) {
         Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
@@ -27,7 +29,8 @@ public class TaskService {
     }
 
     public List<TaskResponseDTO> findAll() {
-        List<Task> tasks = taskRepository.findAll();
+        Long userId = securityUtils.getUserId();
+        List<Task> tasks = taskRepository.findAllByCreatedById(userId);
         return converteListTaskDTO(tasks);
     }
 
@@ -72,5 +75,11 @@ public class TaskService {
         return tasks.stream()
                 .map(this::converteTaskDTO)
                 .collect(Collectors.toList());
+    }
+
+    public Task convertToEntity(TaskCreateDTO task) {
+        Task taskEntity = new Task();
+        taskEntity.setDescription(task.description());
+        return taskEntity;
     }
 }
