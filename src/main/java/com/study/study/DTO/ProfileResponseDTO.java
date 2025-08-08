@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 public record ProfileResponseDTO(
         Long id,
-        Long user_id,
         String name,
         String profile_img,
         Integer daily_time_goal,

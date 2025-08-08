@@ -28,8 +28,7 @@ public class TopicService {
     private final UserRepository userRepository;
 
     public List<TopicResponseDTO> getAll() {
-        Long userId = securityUtils.getUserId();
-        List<Topic> topics = topicRepository.findAllByCreatedById(userId);
+        List<Topic> topics = topicRepository.findAllByCreatedById(securityUtils.getUserId());
         return convertTopicListDTO(topics);
     }
 
@@ -44,8 +43,7 @@ public class TopicService {
 
     public TopicResponseDTO create(TopicCreateDTO data) {
         Topic topic = new Topic();
-        Long userId = securityUtils.getUserId();
-        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        User user = userRepository.findById(securityUtils.getUserId()).orElseThrow(EntityNotFoundException::new);
         topic.setName(data.name());
 
         List<Task> tasks = new ArrayList<>();
