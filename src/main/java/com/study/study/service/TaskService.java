@@ -40,8 +40,10 @@ public class TaskService {
         Task task = new Task();
         User user = userRepository.findById(securityUtils.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
         task.setDescription(data.description());
-        task.setTopic(topicRepository.findById(data.topic_id())
-                .orElseThrow(()-> new EntityNotFoundException("Topic not found")));
+        if(data.topic_id() != null) {
+            task.setTopic(topicRepository.findById(data.topic_id())
+                    .orElseThrow(()-> new EntityNotFoundException("Topic not found")));
+        }
         task.setCreatedBy(user);
         taskRepository.save(task);
         return converteTaskDTO(task);
