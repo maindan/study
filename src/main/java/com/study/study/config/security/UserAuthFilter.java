@@ -11,12 +11,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
@@ -27,34 +25,46 @@ public class UserAuthFilter extends OncePerRequestFilter {
     private final HandlerExceptionResolver handlerExceptionResolver;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+
+        // Ignora endpoints públicos e requisições pré-flight (OPTIONS)
+        return path.startsWith("/auth/")
+                || path.equals("/user/create")
+                || "OPTIONS".equalsIgnoreCase(request.getMethod());
+    }
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
 
-        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         try {
             String token = recoveryToken(request);
-            if(token != null) {
+            if (token != null) {
                 String subject = jwtTokenService.getSubjectFromToken(token);
-                User user = userRepository.findByEmail(subject).get();
+                User user = userRepository.findByEmail(subject)
+                        .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
                 UserDetailsImplementation userDetails = new UserDetailsImplementation(user);
 
-                Authentication auth =
-                        new UsernamePasswordAuthenticationToken(userDetails.getUsername(), null, userDetails.getAuthorities());
+                Authentication auth = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
 
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } else {
-                throw new RuntimeException("Token is null");
+                throw new RuntimeException("Token é nulo");
             }
         } catch (Exception e) {
             handlerExceptionResolver.resolveException(request, response, null, e);
+            return; // Evita continuar o filtro após erro
         }
 
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json");
         filterChain.doFilter(request, response);
     }
 
