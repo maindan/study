@@ -8,7 +8,6 @@ public record TopicResponseDTO(
         Long id,
         String name,
         List<TaskResponseDTO> tasks,
-        Long user_id,
         LocalDateTime created_at,
         LocalDateTime updated_at
 ) {

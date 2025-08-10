@@ -6,24 +6,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-
-@Table(name="profile")
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Profile extends BaseModel {
+@AllArgsConstructor
+public class StudyState {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Topic currentTopic;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;
+    private Task currentTask;
 
-    @Column(nullable=false)
-    private String name;
-    private String profileImg;
+    private Integer totalTimeStudy;
+    private Integer totalTimeBreak;
+    private Integer dailyTimeGoal;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private User createdBy;
+
 }

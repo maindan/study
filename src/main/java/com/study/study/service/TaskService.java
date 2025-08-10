@@ -11,6 +11,7 @@ import com.study.study.repository.UserRepository;
 import com.study.study.utils.SecurityUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class TaskService {
 
     public TaskResponseDTO findById(Long id) {
         Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
+        if(!task.getCreatedBy().getId().equals(securityUtils.getUserId())) {
+            throw new AuthorizationDeniedException("You are not authorized to perform this action");
+        }
         return converteTaskDTO(task);
     }
 
@@ -51,6 +55,9 @@ public class TaskService {
 
     public TaskResponseDTO update(Long id, TaskCreateDTO data) {
         Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
+        if(!task.getCreatedBy().getId().equals(securityUtils.getUserId())) {
+            throw new AuthorizationDeniedException("You are not authorized to perform this action");
+        }
         Optional.ofNullable(task.getDescription()).ifPresent(task::setDescription);
         Optional.ofNullable(task.getStatus()).ifPresent(task::setStatus);
         taskRepository.save(task);
@@ -59,6 +66,9 @@ public class TaskService {
 
     public void delete(Long id) {
         Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
+        if(!task.getCreatedBy().getId().equals(securityUtils.getUserId())) {
+            throw new AuthorizationDeniedException("You are not authorized to perform this action");
+        }
         taskRepository.deleteById(id);
     }
 

@@ -1,6 +1,8 @@
 package com.study.study.controller;
 
 import com.study.study.DTO.ProfileCreateDTO;
+import com.study.study.DTO.ProfileInitialCreateDTO;
+import com.study.study.DTO.ProfileInitialCreateResponseDTO;
 import com.study.study.DTO.ProfileResponseDTO;
 import com.study.study.service.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +21,7 @@ public class ProfileController {
     }
 
     @PostMapping
-    public ResponseEntity<ProfileResponseDTO> createProfile(@RequestBody ProfileCreateDTO data) {
+    public ResponseEntity<ProfileInitialCreateResponseDTO> createProfile(@RequestBody ProfileInitialCreateDTO data) {
         return ResponseEntity.ok().body(profileService.create(data));
     }
 

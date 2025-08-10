@@ -7,7 +7,6 @@ public record ProfileResponseDTO(
         Long id,
         String name,
         String profile_img,
-        Integer daily_time_goal,
         LocalDateTime created_at,
         LocalDateTime updated_at
         ) {

@@ -11,6 +11,7 @@ import com.study.study.repository.UserRepository;
 import com.study.study.utils.SecurityUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,10 +34,9 @@ public class TopicService {
     }
 
     public TopicResponseDTO getById(Long id) {
-        Long userId = securityUtils.getUserId();
         Topic topic = topicRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        if(topic.getCreatedBy().getId() != userId) {
-            throw new EntityNotFoundException();
+        if(!topic.getCreatedBy().getId().equals(securityUtils.getUserId())) {
+            throw new AuthorizationDeniedException("You are not authorized to perform this action");
         }
         return convertTopicDTO(topic);
     }
@@ -64,6 +64,9 @@ public class TopicService {
 
     public TopicResponseDTO update(Long id, TopicCreateDTO data) {
         Topic topic = topicRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        if(!topic.getCreatedBy().getId().equals(securityUtils.getUserId())) {
+            throw new AuthorizationDeniedException("You are not authorized to perform this action");
+        }
         Optional.ofNullable(data.name()).ifPresent(topic::setName);
         topicRepository.save(topic);
         return convertTopicDTO(topic);
@@ -71,6 +74,9 @@ public class TopicService {
 
     public void delete(Long id) {
         Topic topic = topicRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        if(!topic.getCreatedBy().getId().equals(securityUtils.getUserId())) {
+            throw new AuthorizationDeniedException("You are not authorized to perform this action");
+        }
         topicRepository.delete(topic);
     }
 
@@ -79,7 +85,6 @@ public class TopicService {
                 topic.getId(),
                 topic.getName(),
                 taskService.converteListTaskDTO(topic.getTasks()),
-                topic.getCreatedBy().getId(),
                 topic.getCreatedAt(),
                 topic.getUpdatedAt()
         );
