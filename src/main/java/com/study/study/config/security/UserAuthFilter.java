@@ -28,7 +28,6 @@ public class UserAuthFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getServletPath();
 
-        // Ignora endpoints públicos e requisições pré-flight (OPTIONS)
         return path.startsWith("/auth/")
                 || path.equals("/user/create")
                 || "OPTIONS".equalsIgnoreCase(request.getMethod());

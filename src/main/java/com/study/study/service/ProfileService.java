@@ -39,7 +39,7 @@ public class ProfileService {
     }
 
     public ProfileResponseDTO findByUserId() {
-        Profile profile = profileRepository.findByUserId(securityUtils.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Profile profile = profileRepository.findByUserId(securityUtils.getUserId()).orElseThrow(() -> new EntityNotFoundException("Profile not found"));
         if(!profile.getUser().getId().equals(securityUtils.getUserId())) {
             throw new AuthorizationDeniedException("You are not authorized to perform this action");
         }
