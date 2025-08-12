@@ -13,7 +13,7 @@ public class OpenApiConfig  {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Sac API")
+                        .title("Study API")
                         .version("1.0")
                         .description("Documentação da API com Spring Security"))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth")) // Adiciona segurança globalmente
