@@ -59,9 +59,10 @@ public class UserAuthFilter extends OncePerRequestFilter {
             } else {
                 throw new RuntimeException("Token é nulo");
             }
+
         } catch (Exception e) {
+            SecurityContextHolder.clearContext();
             handlerExceptionResolver.resolveException(request, response, null, e);
-            return; // Evita continuar o filtro após erro
         }
 
         filterChain.doFilter(request, response);
