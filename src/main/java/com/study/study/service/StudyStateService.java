@@ -1,6 +1,5 @@
 package com.study.study.service;
 
-import com.study.study.DTO.StudyStateMininalDTO;
 import com.study.study.DTO.StudyStateResponseDTO;
 import com.study.study.DTO.StudyStateUpdateDTO;
 import com.study.study.model.StudyState;
@@ -86,13 +85,6 @@ public class StudyStateService {
 
         studyStateRepository.save(studyState);
         return convertStudyStateDTO(studyState);
-    }
-
-    public StudyStateMininalDTO convertStudyStateMinimalDTO(StudyState data) {
-        return new StudyStateMininalDTO(
-                data.getId(),
-                data.getDailyTimeGoal()
-        );
     }
 
 
