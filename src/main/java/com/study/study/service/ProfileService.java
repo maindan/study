@@ -62,7 +62,7 @@ public class ProfileService {
         return new ProfileResponseDTO(
                 profile.getId(),
                 profile.getName(),
-                profile.getProfileImg(),
+                profile.getProfileImg() != null? profile.getProfileImg(): null,
                 profile.getCreatedAt(),
                 profile.getUpdatedAt()
         );

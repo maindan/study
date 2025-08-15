@@ -21,9 +21,9 @@ public class StudyState {
     @OneToOne(fetch = FetchType.LAZY)
     private Task currentTask;
 
-    private Integer totalTimeStudy;
-    private Integer totalTimeBreak;
-    private Integer dailyTimeGoal;
+    private Integer totalTimeStudy = 0;
+    private Integer totalTimeBreak = 0;
+    private Integer dailyTimeGoal = 0;
 
     @OneToOne(fetch = FetchType.LAZY)
     private User createdBy;

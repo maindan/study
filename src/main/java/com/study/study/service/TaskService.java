@@ -77,7 +77,7 @@ public class TaskService {
                 task.getId(),
                 task.getDescription(),
                 task.getStatus(),
-                task.getTopic().getId(),
+                task.getTopic() != null? task.getTopic().getId():null,
                 task.getCreatedAt(),
                 task.getUpdatedAt()
         );

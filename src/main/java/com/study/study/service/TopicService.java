@@ -84,7 +84,7 @@ public class TopicService {
         return new TopicResponseDTO(
                 topic.getId(),
                 topic.getName(),
-                taskService.converteListTaskDTO(topic.getTasks()),
+                topic.getTasks() != null? taskService.converteListTaskDTO(topic.getTasks()):null,
                 topic.getCreatedAt(),
                 topic.getUpdatedAt()
         );

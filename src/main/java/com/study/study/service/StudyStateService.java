@@ -91,8 +91,8 @@ public class StudyStateService {
     public StudyStateResponseDTO convertStudyStateDTO(StudyState data) {
         return new StudyStateResponseDTO(
                 data.getId(),
-                data.getCurrentTopic().getId(),
-                data.getCurrentTask().getId(),
+                data.getCurrentTopic() != null? data.getCurrentTopic().getId():null,
+                data.getCurrentTask() != null? data.getCurrentTask().getId():null,
                 data.getTotalTimeStudy(),
                 data.getTotalTimeBreak(),
                 data.getDailyTimeGoal()
