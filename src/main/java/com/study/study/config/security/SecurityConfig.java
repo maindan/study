@@ -23,13 +23,11 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
     private final UserAuthFilter userAuthFilter;
-
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         return http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
@@ -42,7 +40,9 @@ public class SecurityConfig {
                                 "/swagger-resources/**",
                                 "/webjars/**",
                                 "/favicon.ico",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+
+                                "/error"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -50,10 +50,29 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .exceptionHandling(exceptions -> exceptions
+                        // 401 - Token inválido ou não autenticado
                         .authenticationEntryPoint((request, response, authException) -> {
                             response.setContentType("application/json");
+                            response.setCharacterEncoding("UTF-8");
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.getWriter().write("{\"error\": \"Token inválido ou expirado\"}");
+                            response.getWriter().write(
+                                    "{\"timestamp\":\"" + java.time.Instant.now() +
+                                            "\",\"status\":401," +
+                                            "\"error\":\"Unauthorized\"," +
+                                            "\"message\":\"Token inválido ou expirado\"}"
+                            );
+                        })
+                        // 403 - Acesso negado para recurso
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.setContentType("application/json");
+                            response.setCharacterEncoding("UTF-8");
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            response.getWriter().write(
+                                    "{\"timestamp\":\"" + java.time.Instant.now() +
+                                            "\",\"status\":403," +
+                                            "\"error\":\"Forbidden\"," +
+                                            "\"message\":\"Acesso negado\"}"
+                            );
                         })
                 )
                 .addFilterBefore(userAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -63,17 +82,14 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
         configuration.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:61386"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
