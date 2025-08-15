@@ -72,7 +72,7 @@ public class ProfileService {
             Profile profile, StudyState studyState) {
         return new ProfileInitialCreateResponseDTO(
                 convertProfileDTO(profile),
-                studyStateService.convertStudyStateDTO(studyState)
+                studyStateService.convertStudyStateMinimalDTO(studyState)
         );
     }
 }
