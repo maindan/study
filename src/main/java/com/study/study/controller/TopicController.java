@@ -26,7 +26,7 @@ public class TopicController {
     }
 
     @PostMapping
-    public ResponseEntity<TopicResponseDTO> createTopic(TopicCreateDTO data) {
+    public ResponseEntity<TopicResponseDTO> createTopic(@RequestBody TopicCreateDTO data) {
         return ResponseEntity.ok().body(topicService.create(data));
     }
 
