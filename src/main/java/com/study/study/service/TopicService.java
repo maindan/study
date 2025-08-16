@@ -25,7 +25,6 @@ public class TopicService {
     private final TopicRepository topicRepository;
     private final TaskService taskService;
     private final SecurityUtils securityUtils;
-    private final UserService userService;
     private final UserRepository userRepository;
 
     public List<TopicResponseDTO> getAll() {
@@ -45,11 +44,13 @@ public class TopicService {
         Topic topic = new Topic();
         User user = userRepository.findById(securityUtils.getUserId()).orElseThrow(EntityNotFoundException::new);
         topic.setName(data.name());
-
+        System.out.println(data.toString());
         List<Task> tasks = new ArrayList<>();
         if(data.tasks() != null && !data.tasks().isEmpty()) {
             for(TaskCreateDTO taskData : data.tasks()) {
-                Task task = taskService.convertToEntity(taskData);
+                System.out.println(taskData.toString());
+                Task task = new Task();
+                task.setDescription(taskData.description());
                 task.setCreatedBy(user);
                 task.setTopic(topic);
                 tasks.add(task);

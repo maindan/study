@@ -88,10 +88,4 @@ public class TaskService {
                 .map(this::converteTaskDTO)
                 .collect(Collectors.toList());
     }
-
-    public Task convertToEntity(TaskCreateDTO task) {
-        Task taskEntity = new Task();
-        taskEntity.setDescription(task.description());
-        return taskEntity;
-    }
 }
