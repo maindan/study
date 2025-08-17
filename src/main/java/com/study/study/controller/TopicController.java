@@ -31,7 +31,7 @@ public class TopicController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TopicResponseDTO> updateTopic(@PathVariable Long id, TopicCreateDTO data) {
+    public ResponseEntity<TopicResponseDTO> updateTopic(@PathVariable Long id, @RequestBody TopicCreateDTO data) {
         return ResponseEntity.ok().body(topicService.update(id, data));
     }
 

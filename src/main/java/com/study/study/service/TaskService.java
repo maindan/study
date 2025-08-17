@@ -1,15 +1,16 @@
 package com.study.study.service;
 
+import com.study.study.DTO.StudyStateResponseDTO;
 import com.study.study.DTO.TaskCreateDTO;
 import com.study.study.DTO.TaskResponseDTO;
-import com.study.study.model.Task;
-import com.study.study.model.Topic;
-import com.study.study.model.User;
+import com.study.study.model.*;
+import com.study.study.repository.StudyStateRepository;
 import com.study.study.repository.TaskRepository;
 import com.study.study.repository.TopicRepository;
 import com.study.study.repository.UserRepository;
 import com.study.study.utils.SecurityUtils;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,8 @@ public class TaskService {
     private final TopicRepository topicRepository;
     private final SecurityUtils securityUtils;
     private final UserRepository userRepository;
+    private final StudyStateRepository studyStateRepository;
+    private final StudyStateService studyStateService;
 
     public TaskResponseDTO findById(Long id) {
         Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
@@ -33,6 +36,36 @@ public class TaskService {
             throw new AuthorizationDeniedException("You are not authorized to perform this action");
         }
         return converteTaskDTO(task);
+    }
+
+    @Transactional
+    public StudyStateResponseDTO startTask(Long id) {
+        Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
+        StudyState studyState = studyStateRepository.findByCreatedById(securityUtils.getUserId()).orElseThrow(()-> new EntityNotFoundException("StudyState not found"));
+        if(studyState.getCurrentTask() != null) {
+            Task previousTask = studyState.getCurrentTask();
+            previousTask.setStatus(TaskStatus.EM_ANDAMENTO);
+            taskRepository.save(previousTask);
+        }
+        studyState.setCurrentTask(task);
+        studyState.setCurrentTopic(task.getTopic());
+        task.setStatus(TaskStatus.EM_ANDAMENTO);
+        taskRepository.save(task);
+        studyStateRepository.save(studyState);
+        return studyStateService.convertStudyStateDTO(studyState);
+    }
+
+    public StudyStateResponseDTO finishTask(Long id) {
+        Task task = taskRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Task not found"));
+        StudyState studyState = studyStateRepository.findByCreatedById(securityUtils.getUserId()).orElseThrow(()-> new EntityNotFoundException("StudyState not found"));
+
+        task.setStatus(TaskStatus.CONCLUIDO);
+        if(task == studyState.getCurrentTask()) {
+            studyState.setCurrentTask(null);
+            studyStateRepository.save(studyState);
+        }
+        taskRepository.save(task);
+        return studyStateService.convertStudyStateDTO(studyState);
     }
 
     public List<TaskResponseDTO> findAll() {
@@ -58,8 +91,8 @@ public class TaskService {
         if(!task.getCreatedBy().getId().equals(securityUtils.getUserId())) {
             throw new AuthorizationDeniedException("You are not authorized to perform this action");
         }
-        Optional.ofNullable(task.getDescription()).ifPresent(task::setDescription);
-        Optional.ofNullable(task.getStatus()).ifPresent(task::setStatus);
+        Optional.ofNullable(data.description()).ifPresent(task::setDescription);
+        System.out.println(data.description());
         taskRepository.save(task);
         return converteTaskDTO(task);
     }

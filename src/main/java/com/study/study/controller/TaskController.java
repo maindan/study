@@ -1,5 +1,6 @@
 package com.study.study.controller;
 
+import com.study.study.DTO.StudyStateResponseDTO;
 import com.study.study.DTO.TaskCreateDTO;
 import com.study.study.DTO.TaskResponseDTO;
 import com.study.study.model.Task;
@@ -21,6 +22,16 @@ public class TaskController {
         return  ResponseEntity.ok(taskService.findById(id));
     }
 
+    @GetMapping("/{id}/start")
+    public ResponseEntity<StudyStateResponseDTO> startTask(@PathVariable Long id) {
+        return  ResponseEntity.ok(taskService.startTask(id));
+    }
+
+    @GetMapping("/{id}/finish")
+    public ResponseEntity<StudyStateResponseDTO> finishTask(@PathVariable Long id) {
+        return  ResponseEntity.ok(taskService.finishTask(id));
+    }
+
     @PostMapping
     public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskCreateDTO data) {
         return ResponseEntity.ok(taskService.create(data));
@@ -32,7 +43,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskResponseDTO> UpdateTask(@PathVariable Long id, TaskCreateDTO data) {
+    public ResponseEntity<TaskResponseDTO> UpdateTask(@PathVariable Long id, @RequestBody TaskCreateDTO data) {
         return ResponseEntity.ok(taskService.update(id, data));
     }
 
