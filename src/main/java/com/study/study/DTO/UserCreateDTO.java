@@ -1,7 +1,9 @@
 package com.study.study.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record UserCreateDTO(
-        String email,
-        String password
+        @NotBlank String email,
+        @NotBlank String password
 ) {
 }

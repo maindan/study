@@ -1,7 +1,9 @@
 package com.study.study.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+
 public record ProfileCreateDTO(
-        String name,
+        @NotBlank String name,
         String profile_img
 ) {
 }
