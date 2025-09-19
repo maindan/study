@@ -13,6 +13,7 @@ import com.study.study.repository.UserRepository;
 import com.study.study.utils.SecurityUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -30,13 +31,14 @@ public class TopicService {
     private final SecurityUtils securityUtils;
     private final UserRepository userRepository;
     private final StudyStateRepository studyStateRepository;
+    private static final String CACHE_NAME = "Topic";
 
     public List<TopicResponseDTO> getAll() {
         List<Topic> topics = topicRepository.findAllByCreatedById(securityUtils.getUserId());
         return convertTopicListDTO(topics);
     }
 
-    public TopicResponseDTO getById(Long id) {
+    public TopicResponseDTO getById(Long id) throws InterruptedException {
         Topic topic = topicRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         if(!topic.getCreatedBy().getId().equals(securityUtils.getUserId())) {
             throw new AuthorizationDeniedException("You are not authorized to perform this action");

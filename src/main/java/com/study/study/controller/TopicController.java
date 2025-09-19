@@ -21,7 +21,7 @@ public class TopicController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TopicResponseDTO> getTopicById(@PathVariable Long id) {
+    public ResponseEntity<TopicResponseDTO> getTopicById(@PathVariable Long id) throws InterruptedException {
         return ResponseEntity.ok().body(topicService.getById(id));
     }
 
