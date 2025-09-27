@@ -1,9 +1,10 @@
 package com.study.study.DTO;
 
 import com.study.study.model.TaskStatus;
+import jakarta.validation.constraints.NotBlank;
 
 public record TaskCreateDTO(
-        String description,
+        @NotBlank String description,
         TaskStatus status,
         Long topic_id
 ) {
