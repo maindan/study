@@ -12,8 +12,6 @@ import com.study.study.repository.UserRepository;
 import com.study.study.utils.SecurityUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +38,6 @@ public class ProfileService {
         return convertProfileInitialCreateDTO(profile, studyState);
     }
 
-    @Cacheable(value = "profile", key = "#id")
     public ProfileResponseDTO findByUserId() {
         Profile profile = profileRepository.findByUserId(securityUtils.getUserId()).orElseThrow(() -> new EntityNotFoundException("Profile not found"));
         if(!profile.getUser().getId().equals(securityUtils.getUserId())) {
@@ -49,7 +46,6 @@ public class ProfileService {
         return convertProfileDTO(profile);
     }
 
-    @CachePut(value = "profile", key = "#result.id")
     public ProfileResponseDTO update(ProfileCreateDTO data) {
         Profile profile = profileRepository.findByUserId(securityUtils.getUserId()).orElseThrow(() -> new EntityNotFoundException("User not found"));
         if(!profile.getUser().getId().equals(securityUtils.getUserId())) {

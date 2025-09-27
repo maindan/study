@@ -33,25 +33,14 @@ public class CustomHandlerExceptionResolver implements HandlerExceptionResolver 
         HttpStatus status;
         String message;
 
-        // 401 - Credenciais inválidas (usuário/senha errados)
-        if (ex instanceof org.springframework.security.authentication.BadCredentialsException) {
-            status = HttpStatus.UNAUTHORIZED;
-            message = "Usuário ou senha inválido";
-            System.out.println("Chegou até aqui");
-        }
-        // 401 - Token inválido / expirado
-        else if (ex instanceof ExpiredJwtException
+        // 401 - Não autenticado / token inválido
+        if (ex instanceof ExpiredJwtException
                 || ex instanceof JwtException
-                || ex instanceof JWTVerificationException) {
+                || ex instanceof AuthenticationException
+                || ex instanceof InsufficientAuthenticationException
+                || ex instanceof JWTVerificationException){
             status = HttpStatus.UNAUTHORIZED;
             message = "Token inválido ou expirado";
-            System.out.println("Chegou até aqui na vdd");
-        }
-        // 401 - Outras falhas de autenticação
-        else if (ex instanceof AuthenticationException
-                || ex instanceof InsufficientAuthenticationException) {
-            status = HttpStatus.UNAUTHORIZED;
-            message = "Não autenticado";
         }
         // 403 - Acesso negado
         else if (ex instanceof AccessDeniedException
