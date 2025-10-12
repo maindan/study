@@ -16,7 +16,7 @@ public class OpenApiConfig  {
                         .title("Study API")
                         .version("1.0")
                         .description("Documentação da API com Spring Security"))
-                .addSecurityItem(new SecurityRequirement().addList("bearerAuth")) // Adiciona segurança globalmente
+                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new io.swagger.v3.oas.models.Components()
                         .addSecuritySchemes("bearerAuth", new SecurityScheme()
                                 .name("bearerAuth")
