@@ -44,8 +44,10 @@ public class TaskService {
         StudyState studyState = studyStateRepository.findByCreatedById(securityUtils.getUserId()).orElseThrow(()-> new EntityNotFoundException("StudyState not found"));
         if(studyState.getCurrentTask() != null) {
             Task previousTask = studyState.getCurrentTask();
-            previousTask.setStatus(TaskStatus.EM_ANDAMENTO);
-            taskRepository.save(previousTask);
+            if(previousTask.getStatus() != TaskStatus.CONCLUIDO) {
+                previousTask.setStatus(TaskStatus.EM_ANDAMENTO);
+                taskRepository.save(previousTask);
+            }
         }
         studyState.setCurrentTask(task);
         studyState.setCurrentTopic(task.getTopic());
