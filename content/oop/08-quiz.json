@@ -1,0 +1,139 @@
+{
+  "intro": "Quiz de revisão de **Programação Orientada a Objetos**. Cobre os pilares (encapsulamento, herança, polimorfismo, abstração) e os princípios SOLID.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Qual é a definição de encapsulamento?",
+      "options": [
+        "Criar várias classes em um mesmo arquivo",
+        "Esconder os detalhes internos de um objeto, expondo o acesso por métodos controlados",
+        "Fazer uma classe herdar de outra",
+        "Permitir que um método tenha vários comportamentos"
+      ],
+      "answer": 1,
+      "explain": "**Encapsulamento** protege o estado interno do objeto (atributos `private`) e controla o acesso por meio de métodos públicos (getters/setters), evitando alterações indevidas."
+    },
+    {
+      "id": "q2",
+      "q": "Qual palavra-chave em Java indica que um método sobrescreve o da superclasse?",
+      "options": ["@Override", "extends", "super", "this"],
+      "answer": 0,
+      "explain": "A anotação `@Override` indica (e o compilador verifica) que o método está sobrescrevendo um da superclasse. `extends` cria a herança; `super` chama membros da superclasse."
+    },
+    {
+      "id": "q3",
+      "q": "O que é polimorfismo?",
+      "options": [
+        "Ter atributos privados",
+        "Capacidade de um mesmo método/referência assumir comportamentos diferentes conforme o objeto",
+        "Criar objetos sem construtor",
+        "Impedir herança"
+      ],
+      "answer": 1,
+      "explain": "**Polimorfismo** permite que uma mesma chamada (ex.: `animal.emitirSom()`) produza comportamentos diferentes dependendo do tipo real do objeto (cão late, gato mia)."
+    },
+    {
+      "id": "q4",
+      "q": "Qual a diferença entre classe abstrata e interface (em Java moderno)?",
+      "options": [
+        "Não há diferença",
+        "Classe abstrata pode ter estado/atributos e construtor; interface define principalmente um contrato e uma classe pode implementar várias",
+        "Interface pode ser instanciada, classe abstrata não",
+        "Classe abstrata não pode ter métodos"
+      ],
+      "answer": 1,
+      "explain": "Uma classe abstrata pode ter atributos, construtor e estado, e uma classe só herda de uma. Interfaces definem um contrato e uma classe pode implementar **várias** interfaces (herança múltipla de tipo)."
+    },
+    {
+      "id": "q5",
+      "q": "O que significa o 'S' de SOLID?",
+      "options": [
+        "Simple Syntax",
+        "Single Responsibility Principle (Responsabilidade Única)",
+        "Standard Reuse",
+        "Static Resolution"
+      ],
+      "answer": 1,
+      "explain": "O **S** é o Single Responsibility Principle: uma classe deve ter apenas uma responsabilidade, ou seja, um único motivo para mudar."
+    },
+    {
+      "id": "q6",
+      "q": "O princípio Open/Closed (O) diz que entidades devem estar:",
+      "options": [
+        "Abertas para modificação e fechadas para extensão",
+        "Abertas para extensão e fechadas para modificação",
+        "Sempre abertas a qualquer mudança",
+        "Sempre fechadas, sem extensão nem modificação"
+      ],
+      "answer": 1,
+      "explain": "OCP: **aberto para extensão, fechado para modificação**. Você adiciona comportamento criando novas classes (ex.: via polimorfismo) sem alterar o código já testado."
+    },
+    {
+      "id": "q7",
+      "q": "Um Pinguim que herda de Ave mas lança exceção ao chamar voar() viola qual princípio?",
+      "options": [
+        "Single Responsibility",
+        "Liskov Substitution",
+        "Interface Segregation",
+        "Dependency Inversion"
+      ],
+      "answer": 1,
+      "explain": "Isso viola o **Liskov Substitution Principle**: uma subclasse deve poder substituir a superclasse sem quebrar o comportamento esperado. Se `Pinguim` não voa, não deveria herdar `voar()`."
+    },
+    {
+      "id": "q8",
+      "q": "O Interface Segregation Principle (I) recomenda:",
+      "options": [
+        "Uma única interface grande com todos os métodos possíveis",
+        "Várias interfaces pequenas e específicas, para que ninguém implemente o que não usa",
+        "Nunca usar interfaces",
+        "Interfaces apenas com constantes"
+      ],
+      "answer": 1,
+      "explain": "ISP defende interfaces **coesas e específicas**. Interfaces 'gordas' forçam classes a implementar métodos que não fazem sentido para elas (muitas vezes vazios)."
+    },
+    {
+      "id": "q9",
+      "q": "O Dependency Inversion Principle (D) recomenda depender de:",
+      "options": [
+        "Implementações concretas, criadas com new dentro da classe",
+        "Abstrações (interfaces), recebendo as implementações de fora",
+        "Variáveis globais",
+        "Classes estáticas"
+      ],
+      "answer": 1,
+      "explain": "DIP: dependa de **abstrações**, não de implementações concretas. Em vez de dar `new` numa classe concreta, receba a dependência por uma interface (injeção de dependência), reduzindo o acoplamento."
+    },
+    {
+      "id": "q10",
+      "q": "Qual modificador de acesso torna um atributo visível apenas dentro da própria classe?",
+      "options": ["public", "protected", "private", "default (package)"],
+      "answer": 2,
+      "explain": "`private` restringe o acesso à própria classe — base do encapsulamento. `protected` libera para subclasses e pacote; `public` para todos; o padrão (sem modificador) é visível no pacote."
+    },
+    {
+      "id": "q11",
+      "q": "O que é sobrecarga (overloading) de métodos?",
+      "options": [
+        "Redefinir um método herdado da superclasse",
+        "Ter vários métodos com o mesmo nome, mas listas de parâmetros diferentes",
+        "Chamar um método muitas vezes em sequência",
+        "Apagar um método de uma classe"
+      ],
+      "answer": 1,
+      "explain": "**Sobrecarga** (overloading) é ter métodos de mesmo nome com **assinaturas diferentes** (tipos/quantidade de parâmetros). Não confundir com **sobrescrita** (override), que redefine um método herdado."
+    },
+    {
+      "id": "q12",
+      "q": "Qual é o principal benefício de aplicar os princípios SOLID?",
+      "options": [
+        "Deixar o programa mais rápido em tempo de execução",
+        "Tornar o código mais flexível, manutenível e fácil de testar",
+        "Reduzir o número de linhas a zero",
+        "Eliminar a necessidade de testes"
+      ],
+      "answer": 1,
+      "explain": "SOLID melhora a **qualidade do design**: código mais flexível a mudanças, com baixo acoplamento, mais fácil de manter, estender e testar. Não é sobre desempenho de execução."
+    }
+  ]
+}

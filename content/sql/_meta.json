@@ -1,0 +1,15 @@
+{
+  "title": "SQL e Bancos Relacionais",
+  "icon": "🗄️",
+  "order": 6,
+  "description": "Bancos de dados relacionais e SQL: modelagem, normalização, consultas, JOINs, agregações e manipulação de dados.",
+  "sections": [
+    { "slug": "introducao", "title": "Bancos Relacionais", "type": "doc", "file": "01-introducao.md", "summary": "SGBD, modelo relacional, tabelas e registros." },
+    { "slug": "modelagem", "title": "Modelagem e Normalização", "type": "doc", "file": "02-modelagem.md", "summary": "Chaves, relacionamentos, formas normais." },
+    { "slug": "select", "title": "Consultas com SELECT", "type": "doc", "file": "03-select.md", "summary": "SELECT, WHERE, ORDER BY, LIMIT, DISTINCT." },
+    { "slug": "joins", "title": "JOINs", "type": "doc", "file": "04-joins.md", "summary": "INNER, LEFT, RIGHT e FULL JOIN." },
+    { "slug": "agregacao", "title": "Agregação e Agrupamento", "type": "doc", "file": "05-agregacao.md", "summary": "COUNT, SUM, AVG, GROUP BY, HAVING." },
+    { "slug": "dml-ddl", "title": "DML e DDL", "type": "doc", "file": "06-dml-ddl.md", "summary": "INSERT, UPDATE, DELETE, CREATE, ALTER." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "07-quiz.json", "summary": "Teste seus conhecimentos de SQL." }
+  ]
+}

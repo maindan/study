@@ -1,0 +1,124 @@
+{
+  "intro": "Quiz de revisão de **SQL**: SELECT, WHERE, JOINs, agregação, agrupamento e comandos DML/DDL. Escolha a alternativa correta em cada pergunta.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Qual cláusula do SQL define quais colunas serão retornadas em uma consulta?",
+      "options": ["FROM", "SELECT", "WHERE", "ORDER BY"],
+      "answer": 1,
+      "explain": "`SELECT` define as colunas (ou expressões) que aparecerão no resultado; `FROM` define a tabela de origem."
+    },
+    {
+      "id": "q2",
+      "q": "Como filtrar linhas em que a categoria é nula (vazia)?",
+      "options": [
+        "WHERE categoria = NULL",
+        "WHERE categoria == NULL",
+        "WHERE categoria IS NULL",
+        "WHERE categoria EMPTY"
+      ],
+      "answer": 2,
+      "explain": "Para testar nulos usa-se `IS NULL` (e `IS NOT NULL`). Comparações com `= NULL` nunca são verdadeiras, pois NULL representa ausência de valor."
+    },
+    {
+      "id": "q3",
+      "q": "No `LIKE`, o que o curinga `%` representa?",
+      "options": [
+        "Exatamente um caractere qualquer",
+        "Qualquer sequência de caracteres (inclusive vazia)",
+        "Apenas dígitos numéricos",
+        "O início de uma linha"
+      ],
+      "answer": 1,
+      "explain": "Em `LIKE`, `%` casa com qualquer sequência de caracteres, e `_` casa com exatamente um caractere. Ex.: `'C%'` traz tudo que começa com C."
+    },
+    {
+      "id": "q4",
+      "q": "Qual tipo de JOIN retorna todas as linhas da tabela da esquerda, mesmo sem correspondência na direita (preenchendo com NULL)?",
+      "options": ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN", "CROSS JOIN"],
+      "answer": 1,
+      "explain": "O `LEFT JOIN` mantém todas as linhas da tabela à esquerda; onde não há par na direita, as colunas dela vêm como NULL."
+    },
+    {
+      "id": "q5",
+      "q": "Qual função de agregação calcula a média dos valores de uma coluna?",
+      "options": ["SUM", "COUNT", "AVG", "MAX"],
+      "answer": 2,
+      "explain": "`AVG` calcula a média. `SUM` soma, `COUNT` conta linhas, `MAX` retorna o maior valor."
+    },
+    {
+      "id": "q6",
+      "q": "Qual a diferença entre `COUNT(*)` e `COUNT(coluna)`?",
+      "options": [
+        "São idênticos em qualquer situação",
+        "COUNT(*) conta todas as linhas; COUNT(coluna) ignora as linhas em que a coluna é NULL",
+        "COUNT(*) ignora NULL; COUNT(coluna) conta tudo",
+        "COUNT(coluna) só funciona com GROUP BY"
+      ],
+      "answer": 1,
+      "explain": "`COUNT(*)` conta todas as linhas do grupo. `COUNT(coluna)` conta apenas as linhas em que aquela coluna **não** é NULL."
+    },
+    {
+      "id": "q7",
+      "q": "Qual a principal diferença entre WHERE e HAVING?",
+      "options": [
+        "WHERE filtra grupos depois da agregação; HAVING filtra linhas antes",
+        "WHERE filtra linhas antes do GROUP BY; HAVING filtra grupos depois da agregação",
+        "Os dois fazem exatamente a mesma coisa",
+        "HAVING só pode ser usado sem GROUP BY"
+      ],
+      "answer": 1,
+      "explain": "`WHERE` atua sobre as linhas antes do agrupamento e não aceita funções de agregação. `HAVING` atua sobre os grupos depois da agregação e pode usar `SUM`, `COUNT`, etc."
+    },
+    {
+      "id": "q8",
+      "q": "Em uma consulta com agregação, qual regra vale para as colunas do SELECT?",
+      "options": [
+        "Toda coluna não agregada precisa estar no GROUP BY",
+        "Nenhuma coluna pode aparecer no GROUP BY",
+        "Só é permitido usar SELECT *",
+        "Colunas agregadas precisam estar no GROUP BY"
+      ],
+      "answer": 0,
+      "explain": "Toda coluna do `SELECT` que não esteja dentro de uma função de agregação deve constar no `GROUP BY`, senão o banco não sabe qual valor escolher para o grupo."
+    },
+    {
+      "id": "q9",
+      "q": "Qual comando é usado para inserir novos registros em uma tabela?",
+      "options": ["UPDATE", "INSERT INTO", "CREATE TABLE", "SELECT"],
+      "answer": 1,
+      "explain": "`INSERT INTO ... VALUES (...)` adiciona novas linhas a uma tabela. `UPDATE` altera linhas existentes e `CREATE TABLE` cria a estrutura."
+    },
+    {
+      "id": "q10",
+      "q": "O que acontece ao executar `DELETE FROM clientes;` sem cláusula WHERE?",
+      "options": [
+        "Apaga apenas a primeira linha",
+        "Dá erro de sintaxe",
+        "Remove TODAS as linhas da tabela",
+        "Apaga a tabela inteira, inclusive sua estrutura"
+      ],
+      "answer": 2,
+      "explain": "Sem `WHERE`, o `DELETE` remove **todas as linhas** da tabela (mas mantém a estrutura). Por isso é essencial testar o filtro com um `SELECT` antes."
+    },
+    {
+      "id": "q11",
+      "q": "Qual constraint garante que uma coluna não pode ter valores repetidos?",
+      "options": ["NOT NULL", "DEFAULT", "UNIQUE", "CHECK"],
+      "answer": 2,
+      "explain": "`UNIQUE` impede valores duplicados na coluna. `NOT NULL` proíbe nulos e `DEFAULT` define um valor padrão."
+    },
+    {
+      "id": "q12",
+      "q": "Qual a diferença entre `DELETE FROM tabela;` e `DROP TABLE tabela;`?",
+      "options": [
+        "DELETE remove os dados mas mantém a tabela; DROP remove a tabela inteira (estrutura e dados)",
+        "DELETE remove a estrutura; DROP remove só os dados",
+        "Os dois apagam apenas os dados",
+        "DROP só funciona em tabelas vazias"
+      ],
+      "answer": 0,
+      "explain": "`DELETE` (DML) remove registros, mas a tabela continua existindo. `DROP TABLE` (DDL) elimina a tabela por completo: estrutura e dados."
+    }
+  ]
+}

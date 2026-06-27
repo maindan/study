@@ -1,0 +1,17 @@
+{
+  "title": "Java",
+  "icon": "☕",
+  "order": 2,
+  "description": "Do zero ao intermediário em Java: sintaxe, controle de fluxo, POO, estruturas de dados e exceções. Linguagem base do Android.",
+  "sections": [
+    { "slug": "introducao", "title": "Introdução e Ambiente", "type": "doc", "file": "01-introducao.md", "summary": "JVM, JDK, compilação e Hello World." },
+    { "slug": "sintaxe-basica", "title": "Sintaxe Básica", "type": "doc", "file": "02-sintaxe-basica.md", "summary": "Variáveis, tipos primitivos e operadores." },
+    { "slug": "controle-de-fluxo", "title": "Controle de Fluxo", "type": "doc", "file": "03-controle-de-fluxo.md", "summary": "if/else, switch, for, while." },
+    { "slug": "metodos", "title": "Métodos", "type": "doc", "file": "04-metodos.md", "summary": "Parâmetros, retorno, sobrecarga, escopo." },
+    { "slug": "poo", "title": "POO em Java", "type": "doc", "file": "05-poo.md", "summary": "Classes, objetos, construtores, herança em Java." },
+    { "slug": "estruturas-de-dados", "title": "Estruturas de Dados", "type": "doc", "file": "06-estruturas-de-dados.md", "summary": "Arrays, ArrayList, HashMap, Set, LinkedList." },
+    { "slug": "strings-e-utilitarios", "title": "Strings e Utilitários", "type": "doc", "file": "07-strings-e-utilitarios.md", "summary": "String, StringBuilder, Math, wrappers." },
+    { "slug": "excecoes", "title": "Exceções", "type": "doc", "file": "08-excecoes.md", "summary": "try/catch, throw, checked vs unchecked." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "09-quiz.json", "summary": "Teste seus conhecimentos de Java." }
+  ]
+}

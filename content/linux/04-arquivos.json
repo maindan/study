@@ -1,0 +1,103 @@
+{
+  "intro": "Pratique a **manipulação de arquivos**: criar, copiar, mover, remover e visualizar conteúdo. Comandos principais: `touch`, `cp`, `mv`, `rm`, `cat`, `less`, `head`, `tail`.",
+  "tasks": [
+    {
+      "id": "t1",
+      "prompt": "Crie um arquivo vazio chamado nota.txt.",
+      "accept": ["touch nota\\.txt", "touch \\./nota\\.txt"],
+      "hint": "touch cria arquivos vazios",
+      "explain": "`touch nota.txt` cria um arquivo vazio (ou atualiza a data de modificação, se ele já existir)."
+    },
+    {
+      "id": "t2",
+      "prompt": "Copie o arquivo nota.txt para um novo arquivo chamado copia.txt.",
+      "accept": ["cp nota\\.txt copia\\.txt"],
+      "hint": "cp origem destino",
+      "explain": "`cp nota.txt copia.txt` (copy) cria uma cópia do arquivo. O primeiro argumento é a origem e o segundo é o destino."
+    },
+    {
+      "id": "t3",
+      "prompt": "Copie a pasta projetos (com todo o seu conteúdo) para uma pasta chamada backup.",
+      "accept": ["cp -r projetos backup", "cp -R projetos backup", "cp -r projetos/ backup", "cp -r projetos backup/"],
+      "hint": "use -r para copiar pastas",
+      "explain": "`cp -r projetos backup` copia uma pasta inteira de forma recursiva. A flag `-r` (recursive) é necessária para copiar diretórios e tudo dentro deles."
+    },
+    {
+      "id": "t4",
+      "prompt": "Renomeie o arquivo nota.txt para anotacoes.txt.",
+      "accept": ["mv nota\\.txt anotacoes\\.txt"],
+      "hint": "mv também renomeia",
+      "explain": "`mv nota.txt anotacoes.txt` (move) renomeia o arquivo. No Linux, renomear e mover são a mesma operação."
+    },
+    {
+      "id": "t5",
+      "prompt": "Mova o arquivo relatorio.txt para dentro da pasta documentos.",
+      "accept": ["mv relatorio\\.txt documentos", "mv relatorio\\.txt documentos/", "mv relatorio\\.txt \\./documentos", "mv relatorio\\.txt \\./documentos/"],
+      "hint": "mv arquivo pasta_destino",
+      "explain": "`mv relatorio.txt documentos` move o arquivo para dentro da pasta `documentos`, mantendo o mesmo nome."
+    },
+    {
+      "id": "t6",
+      "prompt": "Remova (apague) o arquivo copia.txt.",
+      "accept": ["rm copia\\.txt"],
+      "hint": "rm de remove",
+      "explain": "`rm copia.txt` (remove) apaga o arquivo permanentemente. Cuidado: no Linux não há lixeira para arquivos removidos pelo terminal."
+    },
+    {
+      "id": "t7",
+      "prompt": "Remova a pasta backup com todo o seu conteúdo.",
+      "accept": ["rm -r backup", "rm -r backup/", "rm -rf backup", "rm -rf backup/", "rm -fr backup", "rm -R backup"],
+      "hint": "use -r para remover pastas",
+      "explain": "`rm -r backup` remove a pasta e tudo dentro dela recursivamente. A flag `-f` (force) pode ser adicionada para não pedir confirmação — use com muito cuidado."
+    },
+    {
+      "id": "t8",
+      "prompt": "Mostre todo o conteúdo do arquivo anotacoes.txt de uma vez na tela.",
+      "accept": ["cat anotacoes\\.txt"],
+      "hint": "cat concatena e exibe",
+      "explain": "`cat anotacoes.txt` (concatenate) imprime todo o conteúdo do arquivo na tela. Ideal para arquivos pequenos."
+    },
+    {
+      "id": "t9",
+      "prompt": "Abra o arquivo log.txt em um paginador para rolar o conteúdo página a página.",
+      "accept": ["less log\\.txt", "more log\\.txt"],
+      "hint": "use less para navegar",
+      "explain": "`less log.txt` abre o arquivo em um paginador que permite rolar com as setas. Pressione `q` para sair. É melhor que `cat` para arquivos grandes."
+    },
+    {
+      "id": "t10",
+      "prompt": "Mostre apenas as primeiras 10 linhas do arquivo dados.txt.",
+      "accept": ["head dados\\.txt", "head -n 10 dados\\.txt", "head -n10 dados\\.txt", "head -10 dados\\.txt"],
+      "hint": "head mostra o começo",
+      "explain": "`head dados.txt` mostra as 10 primeiras linhas por padrão. Use `-n` para escolher a quantidade, ex.: `head -n 5`."
+    },
+    {
+      "id": "t11",
+      "prompt": "Mostre apenas as últimas 10 linhas do arquivo dados.txt.",
+      "accept": ["tail dados\\.txt", "tail -n 10 dados\\.txt", "tail -n10 dados\\.txt", "tail -10 dados\\.txt"],
+      "hint": "tail mostra o final",
+      "explain": "`tail dados.txt` mostra as 10 últimas linhas. Muito usado para ver o fim de arquivos de log."
+    },
+    {
+      "id": "t12",
+      "prompt": "Acompanhe em tempo real as novas linhas adicionadas ao arquivo app.log.",
+      "accept": ["tail -f app\\.log", "tail -F app\\.log", "tail --follow app\\.log"],
+      "hint": "use a flag -f de follow",
+      "explain": "`tail -f app.log` (follow) mantém o arquivo aberto e mostra novas linhas conforme são gravadas. Essencial para monitorar logs ao vivo. Saia com `Ctrl+C`."
+    },
+    {
+      "id": "t13",
+      "prompt": "Abra o arquivo config.txt no editor de texto nano.",
+      "accept": ["nano config\\.txt"],
+      "hint": "nano é um editor simples de terminal",
+      "explain": "`nano config.txt` abre o editor `nano`, simples e amigável. Salve com `Ctrl+O` e saia com `Ctrl+X`."
+    },
+    {
+      "id": "t14",
+      "prompt": "Crie uma cópia da pasta src para src_backup preservando datas e permissões.",
+      "accept": ["cp -rp src src_backup", "cp -pr src src_backup", "cp -a src src_backup", "cp -ra src src_backup"],
+      "hint": "combine -r com -p ou use -a",
+      "explain": "`cp -rp src src_backup` copia recursivamente (`-r`) e preserva atributos como datas e permissões (`-p`). A flag `-a` (archive) faz tudo isso de uma vez."
+    }
+  ]
+}

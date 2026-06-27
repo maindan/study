@@ -1,0 +1,222 @@
+{
+  "intro": "16 desafios de nível **médio**. Aqui entram os padrões clássicos: Kadane, sliding window, two pointers, hashing e prefix sum. Tente reconhecer o padrão antes de codar.",
+  "challenges": [
+    {
+      "id": "max-subarray",
+      "title": "Soma Máxima de Subarray (Kadane)",
+      "difficulty": "medio",
+      "statement": "Encontre a maior soma de um subarray **contíguo** (não vazio).\n\n**Exemplo:** `[-2,1,-3,4,-1,2,1,-5,4]` → `6` (subarray `[4,-1,2,1]`)",
+      "starter": "class Solution {\n    static int maxSubArray(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maxSubArray(int[] nums) {\n        int best = nums[0], cur = nums[0];\n        for (int i = 1; i < nums.length; i++) {\n            cur = Math.max(nums[i], cur + nums[i]);\n            best = Math.max(best, cur);\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maxSubArray(new int[]{-2,1,-3,4,-1,2,1,-5,4}));\n        System.out.println(Solution.maxSubArray(new int[]{1}));\n        System.out.println(Solution.maxSubArray(new int[]{-1,-2,-3}));\n        System.out.println(Solution.maxSubArray(new int[]{5,4,-1,7,8}));\n    }\n}",
+      "hints": [
+        "Em cada índice decida: continuo o subarray atual ou recomeço aqui?",
+        "cur = max(nums[i], cur + nums[i])."
+      ],
+      "expected": "6\n1\n-1\n23"
+    },
+    {
+      "id": "melhor-compra-venda",
+      "title": "Melhor Momento para Comprar e Vender",
+      "difficulty": "medio",
+      "statement": "`precos[i]` é o preço no dia i. Compre num dia e venda depois para o **maior lucro**. Se não houver lucro, retorne `0`.\n\n**Exemplo:** `[7,1,5,3,6,4]` → `5` (compra a 1, vende a 6)",
+      "starter": "class Solution {\n    static int maxLucro(int[] precos) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maxLucro(int[] precos) {\n        if (precos.length == 0) return 0;\n        int min = precos[0], best = 0;\n        for (int p : precos) {\n            best = Math.max(best, p - min);\n            min = Math.min(min, p);\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maxLucro(new int[]{7,1,5,3,6,4}));\n        System.out.println(Solution.maxLucro(new int[]{7,6,4,3,1}));\n        System.out.println(Solution.maxLucro(new int[]{1,2}));\n        System.out.println(Solution.maxLucro(new int[]{3}));\n    }\n}",
+      "hints": [
+        "Guarde o menor preço visto até agora e teste o lucro a cada dia."
+      ],
+      "expected": "5\n0\n1\n0"
+    },
+    {
+      "id": "produto-exceto-self",
+      "title": "Produto Exceto o Próprio",
+      "difficulty": "medio",
+      "statement": "Retorne `res[i]` = produto de todos os elementos **exceto** `nums[i]`, **sem usar divisão**.\n\n**Exemplo:** `[1,2,3,4]` → `[24,12,8,6]`",
+      "starter": "class Solution {\n    static int[] produtoExceto(int[] nums) {\n        // escreva sua solução\n        return nums;\n    }\n}",
+      "reference": "class Solution {\n    static int[] produtoExceto(int[] nums) {\n        int n = nums.length;\n        int[] res = new int[n];\n        res[0] = 1;\n        for (int i = 1; i < n; i++) res[i] = res[i - 1] * nums[i - 1];\n        int dir = 1;\n        for (int i = n - 1; i >= 0; i--) {\n            res[i] *= dir;\n            dir *= nums[i];\n        }\n        return res;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.produtoExceto(new int[]{1,2,3,4})));\n        System.out.println(Arrays.toString(Solution.produtoExceto(new int[]{-1,1,0,-3,3})));\n        System.out.println(Arrays.toString(Solution.produtoExceto(new int[]{2,3})));\n    }\n}",
+      "hints": [
+        "Faça duas passadas: produtos à esquerda, depois multiplique pelos produtos à direita."
+      ],
+      "expected": "[24, 12, 8, 6]\n[0, 0, 9, 0, 0]\n[3, 2]"
+    },
+    {
+      "id": "two-sum-ordenado",
+      "title": "Two Sum II (Array Ordenado)",
+      "difficulty": "medio",
+      "statement": "O array está **ordenado**. Retorne os índices `[i, j]` (i < j) de dois números que somam `alvo`. Use dois ponteiros — `O(n)` tempo, `O(1)` espaço.\n\n**Exemplo:** `[2,7,11,15], alvo=9` → `[0,1]`",
+      "starter": "class Solution {\n    static int[] twoSumII(int[] nums, int alvo) {\n        // escreva sua solução\n        return new int[]{-1, -1};\n    }\n}",
+      "reference": "class Solution {\n    static int[] twoSumII(int[] nums, int alvo) {\n        int i = 0, j = nums.length - 1;\n        while (i < j) {\n            int s = nums[i] + nums[j];\n            if (s == alvo) return new int[]{i, j};\n            else if (s < alvo) i++;\n            else j--;\n        }\n        return new int[]{-1, -1};\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.twoSumII(new int[]{2,7,11,15}, 9)));\n        System.out.println(Arrays.toString(Solution.twoSumII(new int[]{2,3,4}, 6)));\n        System.out.println(Arrays.toString(Solution.twoSumII(new int[]{-3,-1,0,2,5}, 1)));\n    }\n}",
+      "hints": [
+        "Soma muito grande? mova o ponteiro da direita. Muito pequena? mova o da esquerda."
+      ],
+      "expected": "[0, 1]\n[0, 2]\n[1, 3]"
+    },
+    {
+      "id": "remover-elemento",
+      "title": "Remover Elemento",
+      "difficulty": "medio",
+      "statement": "Remova todas as ocorrências de `val` in-place e retorne o **novo tamanho**.\n\n**Exemplo:** `[3,2,2,3], val=3` → `2`",
+      "starter": "class Solution {\n    static int removerElemento(int[] nums, int val) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int removerElemento(int[] nums, int val) {\n        int k = 0;\n        for (int n : nums) if (n != val) nums[k++] = n;\n        return k;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.removerElemento(new int[]{3,2,2,3}, 3));\n        System.out.println(Solution.removerElemento(new int[]{0,1,2,2,3,0,4,2}, 2));\n        System.out.println(Solution.removerElemento(new int[]{1,1,1}, 1));\n        System.out.println(Solution.removerElemento(new int[]{}, 0));\n    }\n}",
+      "hints": [
+        "Ponteiro de escrita: só copie os elementos que não são `val`."
+      ],
+      "expected": "2\n5\n0\n0"
+    },
+    {
+      "id": "merge-ordenados",
+      "title": "Mesclar Dois Arrays Ordenados",
+      "difficulty": "medio",
+      "statement": "Dados dois arrays **ordenados**, retorne um novo array ordenado com todos os elementos.\n\n**Exemplo:** `[1,3,5]` e `[2,4,6]` → `[1,2,3,4,5,6]`",
+      "starter": "class Solution {\n    static int[] merge(int[] a, int[] b) {\n        // escreva sua solução\n        return new int[]{};\n    }\n}",
+      "reference": "class Solution {\n    static int[] merge(int[] a, int[] b) {\n        int[] r = new int[a.length + b.length];\n        int i = 0, j = 0, k = 0;\n        while (i < a.length && j < b.length)\n            r[k++] = (a[i] <= b[j]) ? a[i++] : b[j++];\n        while (i < a.length) r[k++] = a[i++];\n        while (j < b.length) r[k++] = b[j++];\n        return r;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.merge(new int[]{1,3,5}, new int[]{2,4,6})));\n        System.out.println(Arrays.toString(Solution.merge(new int[]{}, new int[]{1,2})));\n        System.out.println(Arrays.toString(Solution.merge(new int[]{1,2,3}, new int[]{})));\n        System.out.println(Arrays.toString(Solution.merge(new int[]{1,1}, new int[]{1,1})));\n    }\n}",
+      "hints": [
+        "Dois ponteiros, um em cada array; sempre copie o menor."
+      ],
+      "expected": "[1, 2, 3, 4, 5, 6]\n[1, 2]\n[1, 2, 3]\n[1, 1, 1, 1]"
+    },
+    {
+      "id": "majority-element",
+      "title": "Elemento Majoritário (Boyer-Moore)",
+      "difficulty": "medio",
+      "statement": "Retorne o elemento que aparece **mais da metade** das vezes (sempre existe). Faça em `O(n)` tempo e `O(1)` espaço.\n\n**Exemplo:** `[2,2,1,1,1,2,2]` → `2`",
+      "starter": "class Solution {\n    static int majoritario(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int majoritario(int[] nums) {\n        int cand = nums[0], cont = 0;\n        for (int n : nums) {\n            if (cont == 0) cand = n;\n            cont += (n == cand) ? 1 : -1;\n        }\n        return cand;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.majoritario(new int[]{2,2,1,1,1,2,2}));\n        System.out.println(Solution.majoritario(new int[]{3,3,4}));\n        System.out.println(Solution.majoritario(new int[]{1}));\n        System.out.println(Solution.majoritario(new int[]{5,5,5,5,2,2,2}));\n    }\n}",
+      "hints": [
+        "Voto de maioria: mantenha um candidato e um contador.",
+        "Contador zerou? troque o candidato."
+      ],
+      "expected": "2\n3\n1\n5"
+    },
+    {
+      "id": "container-most-water",
+      "title": "Container com Mais Água",
+      "difficulty": "medio",
+      "statement": "`altura[i]` é a altura da linha i. Escolha duas linhas que, com o eixo x, formem o recipiente de **maior área**.\n\n**Exemplo:** `[1,8,6,2,5,4,8,3,7]` → `49`",
+      "starter": "class Solution {\n    static int maxArea(int[] altura) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maxArea(int[] altura) {\n        int i = 0, j = altura.length - 1, best = 0;\n        while (i < j) {\n            int h = Math.min(altura[i], altura[j]);\n            best = Math.max(best, h * (j - i));\n            if (altura[i] < altura[j]) i++;\n            else j--;\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maxArea(new int[]{1,8,6,2,5,4,8,3,7}));\n        System.out.println(Solution.maxArea(new int[]{1,1}));\n        System.out.println(Solution.maxArea(new int[]{4,3,2,1,4}));\n        System.out.println(Solution.maxArea(new int[]{1,2,1}));\n    }\n}",
+      "hints": [
+        "A área é limitada pela menor das duas alturas.",
+        "Mova o ponteiro da menor altura para tentar melhorar."
+      ],
+      "expected": "49\n1\n16\n2"
+    },
+    {
+      "id": "max-soma-janela-k",
+      "title": "Soma Máxima de Janela de Tamanho k",
+      "difficulty": "medio",
+      "statement": "Retorne a maior soma de uma janela contígua de tamanho `k`. Se `k > n`, retorne `0`.\n\n**Exemplo:** `[2,1,5,1,3,2], k=3` → `9` (`[5,1,3]`)",
+      "starter": "class Solution {\n    static int maxSomaJanela(int[] nums, int k) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maxSomaJanela(int[] nums, int k) {\n        if (k > nums.length || k <= 0) return 0;\n        int soma = 0;\n        for (int i = 0; i < k; i++) soma += nums[i];\n        int best = soma;\n        for (int i = k; i < nums.length; i++) {\n            soma += nums[i] - nums[i - k];\n            best = Math.max(best, soma);\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maxSomaJanela(new int[]{2,1,5,1,3,2}, 3));\n        System.out.println(Solution.maxSomaJanela(new int[]{2,3,4,1,5}, 2));\n        System.out.println(Solution.maxSomaJanela(new int[]{1,2}, 3));\n        System.out.println(Solution.maxSomaJanela(new int[]{5}, 1));\n    }\n}",
+      "hints": [
+        "Janela deslizante: ao avançar, some o novo e subtraia o que saiu.",
+        "Não recalcule a soma inteira a cada passo."
+      ],
+      "expected": "9\n7\n0\n5"
+    },
+    {
+      "id": "numero-faltando",
+      "title": "Número Faltando",
+      "difficulty": "medio",
+      "statement": "O array contém `n` números distintos de `0` a `n` (falta exatamente um). Retorne o que falta.\n\n**Exemplo:** `[3,0,1]` → `2`",
+      "starter": "class Solution {\n    static int faltando(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int faltando(int[] nums) {\n        int n = nums.length;\n        int esperado = n * (n + 1) / 2;\n        int soma = 0;\n        for (int x : nums) soma += x;\n        return esperado - soma;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.faltando(new int[]{3,0,1}));\n        System.out.println(Solution.faltando(new int[]{0,1}));\n        System.out.println(Solution.faltando(new int[]{9,6,4,2,3,5,7,0,1}));\n        System.out.println(Solution.faltando(new int[]{0}));\n    }\n}",
+      "hints": [
+        "Soma esperada de 0..n é n(n+1)/2. Subtraia a soma real.",
+        "Alternativa: XOR de índices e valores."
+      ],
+      "expected": "2\n2\n8\n1"
+    },
+    {
+      "id": "single-number",
+      "title": "Número Único (XOR)",
+      "difficulty": "medio",
+      "statement": "Todo elemento aparece **duas vezes**, exceto um. Encontre-o em `O(n)` tempo e `O(1)` espaço.\n\n**Exemplo:** `[4,1,2,1,2]` → `4`",
+      "starter": "class Solution {\n    static int unico(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int unico(int[] nums) {\n        int r = 0;\n        for (int n : nums) r ^= n;\n        return r;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.unico(new int[]{4,1,2,1,2}));\n        System.out.println(Solution.unico(new int[]{2,2,1}));\n        System.out.println(Solution.unico(new int[]{1}));\n        System.out.println(Solution.unico(new int[]{7,3,5,3,7}));\n    }\n}",
+      "hints": [
+        "a ^ a = 0 e a ^ 0 = a. O XOR de tudo sobra o único.",
+        "Não precisa de HashMap."
+      ],
+      "expected": "4\n1\n1\n5"
+    },
+    {
+      "id": "intersecao",
+      "title": "Interseção de Dois Arrays",
+      "difficulty": "medio",
+      "statement": "Retorne os elementos **distintos** que aparecem nos dois arrays, em ordem **crescente**.\n\n**Exemplo:** `[4,9,5]` e `[9,4,9,8,4]` → `[4,9]`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int[] intersecao(int[] a, int[] b) {\n        // escreva sua solução\n        return new int[]{};\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int[] intersecao(int[] a, int[] b) {\n        Set<Integer> sa = new HashSet<>();\n        for (int x : a) sa.add(x);\n        TreeSet<Integer> comum = new TreeSet<>();\n        for (int x : b) if (sa.contains(x)) comum.add(x);\n        int[] r = new int[comum.size()];\n        int i = 0;\n        for (int x : comum) r[i++] = x;\n        return r;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.intersecao(new int[]{4,9,5}, new int[]{9,4,9,8,4})));\n        System.out.println(Arrays.toString(Solution.intersecao(new int[]{1,2,2,1}, new int[]{2,2})));\n        System.out.println(Arrays.toString(Solution.intersecao(new int[]{1,2,3}, new int[]{4,5})));\n    }\n}",
+      "hints": [
+        "Coloque um array num HashSet e teste os elementos do outro.",
+        "Use um TreeSet para já sair ordenado e sem repetição."
+      ],
+      "expected": "[4, 9]\n[2]\n[]"
+    },
+    {
+      "id": "sort-colors",
+      "title": "Ordenar Cores (Dutch Flag)",
+      "difficulty": "medio",
+      "statement": "O array contém apenas `0`, `1` e `2`. Ordene-o **in-place** em uma passada. Retorne o array.\n\n**Exemplo:** `[2,0,2,1,1,0]` → `[0,0,1,1,2,2]`",
+      "starter": "class Solution {\n    static int[] sortColors(int[] nums) {\n        // escreva sua solução\n        return nums;\n    }\n}",
+      "reference": "class Solution {\n    static int[] sortColors(int[] nums) {\n        int baixo = 0, meio = 0, alto = nums.length - 1;\n        while (meio <= alto) {\n            if (nums[meio] == 0) { troca(nums, baixo++, meio++); }\n            else if (nums[meio] == 1) { meio++; }\n            else { troca(nums, meio, alto--); }\n        }\n        return nums;\n    }\n    static void troca(int[] a, int i, int j) {\n        int t = a[i]; a[i] = a[j]; a[j] = t;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.sortColors(new int[]{2,0,2,1,1,0})));\n        System.out.println(Arrays.toString(Solution.sortColors(new int[]{2,0,1})));\n        System.out.println(Arrays.toString(Solution.sortColors(new int[]{0})));\n        System.out.println(Arrays.toString(Solution.sortColors(new int[]{1,2,0,2,1,0})));\n    }\n}",
+      "hints": [
+        "Três ponteiros: baixo (0s), meio (atual), alto (2s).",
+        "0 vai para o início, 2 para o fim, 1 fica."
+      ],
+      "expected": "[0, 0, 1, 1, 2, 2]\n[0, 1, 2]\n[0]\n[0, 0, 1, 1, 2, 2]"
+    },
+    {
+      "id": "running-sum",
+      "title": "Soma Acumulada (Running Sum)",
+      "difficulty": "medio",
+      "statement": "Retorne o array de **somas acumuladas**: `res[i] = nums[0] + ... + nums[i]`.\n\n**Exemplo:** `[1,2,3,4]` → `[1,3,6,10]`",
+      "starter": "class Solution {\n    static int[] runningSum(int[] nums) {\n        // escreva sua solução\n        return nums;\n    }\n}",
+      "reference": "class Solution {\n    static int[] runningSum(int[] nums) {\n        for (int i = 1; i < nums.length; i++) nums[i] += nums[i - 1];\n        return nums;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.runningSum(new int[]{1,2,3,4})));\n        System.out.println(Arrays.toString(Solution.runningSum(new int[]{1,1,1,1,1})));\n        System.out.println(Arrays.toString(Solution.runningSum(new int[]{3,1,2,10,1})));\n        System.out.println(Arrays.toString(Solution.runningSum(new int[]{5})));\n    }\n}",
+      "hints": [
+        "Cada posição é a anterior somada ao valor atual. É a base do prefix sum."
+      ],
+      "expected": "[1, 3, 6, 10]\n[1, 2, 3, 4, 5]\n[3, 4, 6, 16, 17]\n[5]"
+    },
+    {
+      "id": "subarray-sum-k",
+      "title": "Subarrays com Soma k",
+      "difficulty": "medio",
+      "statement": "Conte quantos subarrays **contíguos** têm soma igual a `k`. Use prefix sum + HashMap.\n\n**Exemplo:** `[1,1,1], k=2` → `2`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int subarraySumK(int[] nums, int k) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int subarraySumK(int[] nums, int k) {\n        Map<Integer, Integer> cont = new HashMap<>();\n        cont.put(0, 1);\n        int soma = 0, total = 0;\n        for (int n : nums) {\n            soma += n;\n            total += cont.getOrDefault(soma - k, 0);\n            cont.put(soma, cont.getOrDefault(soma, 0) + 1);\n        }\n        return total;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.subarraySumK(new int[]{1,1,1}, 2));\n        System.out.println(Solution.subarraySumK(new int[]{1,2,3}, 3));\n        System.out.println(Solution.subarraySumK(new int[]{1,-1,0}, 0));\n        System.out.println(Solution.subarraySumK(new int[]{3,4,7,2,-3,1,4,2}, 7));\n    }\n}",
+      "hints": [
+        "Se soma_atual - k já apareceu, há um subarray com soma k terminando aqui.",
+        "Inicialize o mapa com {0: 1}."
+      ],
+      "expected": "2\n2\n3\n4"
+    },
+    {
+      "id": "max-consecutivos-uns",
+      "title": "Máximo de 1s Consecutivos",
+      "difficulty": "medio",
+      "statement": "O array contém apenas `0` e `1`. Retorne o maior número de `1`s consecutivos.\n\n**Exemplo:** `[1,1,0,1,1,1]` → `3`",
+      "starter": "class Solution {\n    static int maxConsecutivosUns(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maxConsecutivosUns(int[] nums) {\n        int best = 0, cur = 0;\n        for (int n : nums) {\n            cur = (n == 1) ? cur + 1 : 0;\n            best = Math.max(best, cur);\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maxConsecutivosUns(new int[]{1,1,0,1,1,1}));\n        System.out.println(Solution.maxConsecutivosUns(new int[]{1,0,1,1,0,1}));\n        System.out.println(Solution.maxConsecutivosUns(new int[]{0,0,0}));\n        System.out.println(Solution.maxConsecutivosUns(new int[]{1,1,1,1}));\n    }\n}",
+      "hints": [
+        "Zere o contador ao ver um 0; guarde o máximo a cada passo."
+      ],
+      "expected": "3\n2\n0\n4"
+    }
+  ]
+}

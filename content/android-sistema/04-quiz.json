@@ -1,0 +1,129 @@
+{
+  "intro": "Quiz do módulo Sistema Android. Teste o que você aprendeu sobre história, arquitetura em camadas, processos e segurança. Escolha a alternativa correta em cada questão.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Em qual kernel o sistema operacional Android é baseado?",
+      "options": ["Windows NT", "Linux", "BSD", "macOS (XNU)"],
+      "answer": 1,
+      "explain": "O Android é construído sobre o **kernel Linux**, que cuida de processos, memória, drivers e segurança básica."
+    },
+    {
+      "id": "q2",
+      "q": "O que é o AOSP?",
+      "options": [
+        "Um aplicativo de mensagens do Google",
+        "O Android Open Source Project, a versão de código aberto do Android",
+        "Um modelo de celular da Open Handset Alliance",
+        "Uma linguagem de programação para Android"
+      ],
+      "answer": 1,
+      "explain": "**AOSP (Android Open Source Project)** é o código aberto do Android, mantido pelo Google e que qualquer pessoa pode baixar e modificar."
+    },
+    {
+      "id": "q3",
+      "q": "O que é a Open Handset Alliance (OHA)?",
+      "options": [
+        "Uma loja de aplicativos concorrente da Play Store",
+        "Um consórcio de empresas criado para desenvolver padrões abertos para dispositivos móveis",
+        "Um departamento interno exclusivo do Google",
+        "Um certificado de segurança para APKs"
+      ],
+      "answer": 1,
+      "explain": "A **Open Handset Alliance** é um consórcio de empresas (Google, fabricantes, operadoras, fabricantes de chips) que apoia o Android e padrões abertos para celulares."
+    },
+    {
+      "id": "q4",
+      "q": "Para que serve o 'API level' no Android?",
+      "options": [
+        "Mede o nível de bateria do dispositivo",
+        "Identifica o conjunto de APIs disponíveis em cada versão do Android",
+        "Define a velocidade do processador",
+        "Indica o tamanho do APK"
+      ],
+      "answer": 1,
+      "explain": "Cada versão do Android tem um **API level** (número inteiro) que identifica quais APIs estão disponíveis. Devs usam isso em `minSdk`, `targetSdk` e `compileSdk`."
+    },
+    {
+      "id": "q5",
+      "q": "Qual API level corresponde ao Android 14?",
+      "options": ["31", "33", "34", "35"],
+      "answer": 2,
+      "explain": "O **Android 14** corresponde ao **API level 34** (2023). Android 13 = 33, Android 15 = 35."
+    },
+    {
+      "id": "q6",
+      "q": "Qual é a função da HAL (Hardware Abstraction Layer)?",
+      "options": [
+        "Compilar o bytecode dos apps",
+        "Fornecer interfaces padronizadas entre o hardware e as camadas superiores de software",
+        "Armazenar os arquivos do usuário",
+        "Gerenciar as permissões dos apps"
+      ],
+      "answer": 1,
+      "explain": "A **HAL** define interfaces padronizadas para o hardware (câmera, sensores, áudio), permitindo que o framework converse com componentes de fabricantes diferentes da mesma forma."
+    },
+    {
+      "id": "q7",
+      "q": "Qual runtime substituiu o Dalvik a partir do Android 5.0?",
+      "options": ["JVM", "ART (Android Runtime)", "GraalVM", "Bionic"],
+      "answer": 1,
+      "explain": "O **ART (Android Runtime)** substituiu o Dalvik. Ele usa compilação **AOT** (antes da execução) combinada com JIT, deixando os apps mais rápidos."
+    },
+    {
+      "id": "q8",
+      "q": "Qual é a principal diferença entre Dalvik e ART quanto à compilação?",
+      "options": [
+        "Dalvik usa AOT e ART usa apenas interpretação",
+        "Dalvik usava JIT (em execução) e o ART usa principalmente AOT (antes de rodar)",
+        "Ambos usam exatamente a mesma estratégia",
+        "ART não compila código, apenas o interpreta"
+      ],
+      "answer": 1,
+      "explain": "O **Dalvik** usava **JIT** (compilação durante a execução), enquanto o **ART** usa principalmente **AOT** (compilação antecipada), além de JIT e perfis nas versões modernas."
+    },
+    {
+      "id": "q9",
+      "q": "Como o Android isola os aplicativos uns dos outros (sandbox)?",
+      "options": [
+        "Atribuindo um ID de usuário (UID) Linux único a cada app",
+        "Colocando todos os apps no mesmo processo",
+        "Criptografando o código-fonte de cada app",
+        "Executando todos os apps como administrador (root)"
+      ],
+      "answer": 0,
+      "explain": "Cada app recebe um **UID Linux único** e roda no próprio processo. Assim, um app não pode acessar diretamente os arquivos ou a memória de outro — esse é o **Application Sandbox**."
+    },
+    {
+      "id": "q10",
+      "q": "Por que todo APK precisa ser assinado digitalmente?",
+      "options": [
+        "Para reduzir o tamanho do arquivo",
+        "Para garantir a identidade do autor e a integridade do app, e permitir atualizações seguras",
+        "Apenas para aparecer na Play Store, sem outra finalidade",
+        "Para aumentar a velocidade de execução"
+      ],
+      "answer": 1,
+      "explain": "A **assinatura digital** prova quem é o autor, garante que o APK não foi alterado e exige que atualizações usem a **mesma chave**, impedindo atualizações falsas."
+    },
+    {
+      "id": "q11",
+      "q": "Qual mecanismo o Android usa como base para a comunicação entre processos (IPC)?",
+      "options": ["Binder", "HTTP", "Sockets TCP exclusivamente", "Pipes nomeados do Windows"],
+      "answer": 0,
+      "explain": "O **Binder** é o mecanismo de IPC do Android, integrado ao kernel. Ele permite que apps chamem serviços do sistema de forma segura e identifiquem quem está chamando (UID/PID)."
+    },
+    {
+      "id": "q12",
+      "q": "Qual é o papel do processo Zygote no Android?",
+      "options": [
+        "Armazenar as senhas do usuário",
+        "Servir de processo-base pré-carregado que é clonado (fork) para iniciar novos apps rapidamente",
+        "Compilar os APKs antes da publicação",
+        "Gerenciar a conexão de rede"
+      ],
+      "answer": 1,
+      "explain": "O **Zygote** inicia no boot já com o ART e bibliotecas comuns carregados. Novos apps são criados por **fork** do Zygote, o que acelera o início e economiza memória."
+    }
+  ]
+}

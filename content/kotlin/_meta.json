@@ -1,0 +1,16 @@
+{
+  "title": "Kotlin",
+  "icon": "🟣",
+  "order": 3,
+  "description": "Kotlin moderno: sintaxe concisa, null safety, funções, classes e coleções. Linguagem oficial para Android.",
+  "sections": [
+    { "slug": "introducao", "title": "Introdução ao Kotlin", "type": "doc", "file": "01-introducao.md", "summary": "Por que Kotlin, interop com Java, primeiro programa." },
+    { "slug": "sintaxe-basica", "title": "Sintaxe Básica", "type": "doc", "file": "02-sintaxe-basica.md", "summary": "val/var, tipos, inferência, string templates." },
+    { "slug": "null-safety", "title": "Null Safety", "type": "doc", "file": "03-null-safety.md", "summary": "Tipos nulos, ?., ?:, !!, let." },
+    { "slug": "controle-de-fluxo", "title": "Controle de Fluxo", "type": "doc", "file": "04-controle-de-fluxo.md", "summary": "if/when como expressão, loops, ranges." },
+    { "slug": "funcoes", "title": "Funções e Lambdas", "type": "doc", "file": "05-funcoes.md", "summary": "Funções, parâmetros default, lambdas, higher-order." },
+    { "slug": "classes-e-objetos", "title": "Classes e Objetos", "type": "doc", "file": "06-classes-e-objetos.md", "summary": "data class, sealed, object, companion." },
+    { "slug": "colecoes", "title": "Coleções", "type": "doc", "file": "07-colecoes.md", "summary": "List, Map, Set e operações funcionais (map, filter)." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "08-quiz.json", "summary": "Teste seus conhecimentos de Kotlin." }
+  ]
+}

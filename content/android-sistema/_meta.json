@@ -1,0 +1,12 @@
+{
+  "title": "Sistema Android",
+  "icon": "🤖",
+  "order": 7,
+  "description": "Como o Android funciona por dentro: história, AOSP, arquitetura em camadas, kernel Linux, ART e o modelo de segurança.",
+  "sections": [
+    { "slug": "o-que-e-android", "title": "O que é o Android", "type": "doc", "file": "01-o-que-e-android.md", "summary": "História, AOSP, versões e ecossistema." },
+    { "slug": "arquitetura-camadas", "title": "Arquitetura em Camadas", "type": "doc", "file": "02-arquitetura-camadas.md", "summary": "Kernel Linux, HAL, ART, bibliotecas, framework." },
+    { "slug": "processos-e-seguranca", "title": "Processos e Segurança", "type": "doc", "file": "03-processos-e-seguranca.md", "summary": "Sandbox, permissões, usuários e Binder/IPC." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "04-quiz.json", "summary": "Teste seus conhecimentos do sistema Android." }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "intro": "Pratique a **navegação** pelo sistema de arquivos do Linux. Digite o comando que resolve cada tarefa. Comandos principais: `pwd`, `ls`, `cd`, `mkdir`.",
+  "tasks": [
+    {
+      "id": "t1",
+      "prompt": "Mostre o diretório de trabalho atual (o caminho onde você está).",
+      "accept": ["pwd"],
+      "hint": "p de print working directory",
+      "explain": "`pwd` (print working directory) mostra o caminho absoluto do diretório em que você está atualmente."
+    },
+    {
+      "id": "t2",
+      "prompt": "Liste os arquivos e pastas do diretório atual.",
+      "accept": ["ls"],
+      "hint": "duas letras, de list",
+      "explain": "`ls` (list) lista o conteúdo do diretório atual, mostrando arquivos e pastas visíveis."
+    },
+    {
+      "id": "t3",
+      "prompt": "Liste os arquivos em formato longo (com permissões, dono e tamanho).",
+      "accept": ["ls -l"],
+      "hint": "use a flag -l",
+      "explain": "`ls -l` mostra o formato longo: permissões, número de links, dono, grupo, tamanho, data e nome."
+    },
+    {
+      "id": "t4",
+      "prompt": "Liste todos os arquivos, inclusive os ocultos (que começam com ponto).",
+      "accept": ["ls -a"],
+      "hint": "a de all",
+      "explain": "`ls -a` (all) mostra também os arquivos ocultos, cujos nomes começam com um ponto (ex.: `.bashrc`)."
+    },
+    {
+      "id": "t5",
+      "prompt": "Liste todos os arquivos, inclusive ocultos, em formato longo.",
+      "accept": ["ls -la", "ls -al", "ls -a -l", "ls -l -a"],
+      "hint": "combine -l e -a",
+      "explain": "`ls -la` combina o formato longo (`-l`) com a exibição de arquivos ocultos (`-a`). A ordem das flags não importa."
+    },
+    {
+      "id": "t6",
+      "prompt": "Liste o conteúdo do diretório /etc.",
+      "accept": ["ls /etc", "ls /etc/"],
+      "hint": "ls seguido do caminho",
+      "explain": "`ls /etc` lista o conteúdo de um diretório específico passando o caminho como argumento."
+    },
+    {
+      "id": "t7",
+      "prompt": "Entre no diretório chamado projetos (que está no diretório atual).",
+      "accept": ["cd projetos", "cd projetos/", "cd ./projetos", "cd ./projetos/"],
+      "hint": "cd de change directory",
+      "explain": "`cd projetos` (change directory) entra no diretório `projetos` usando um caminho relativo ao diretório atual."
+    },
+    {
+      "id": "t8",
+      "prompt": "Suba um nível, indo para o diretório pai.",
+      "accept": ["cd \\.\\.", "cd \\.\\./"],
+      "hint": "use dois pontos",
+      "explain": "`cd ..` sobe um nível na árvore de diretórios, indo para o diretório pai. O `..` representa o diretório acima do atual."
+    },
+    {
+      "id": "t9",
+      "prompt": "Vá direto para a sua pasta pessoal (home).",
+      "accept": ["cd ~", "cd", "cd ~/", "cd \\$HOME"],
+      "hint": "o til representa a home",
+      "explain": "`cd ~` leva você à sua pasta pessoal. O `~` é um atalho para o caminho da home (ex.: `/home/ana`). Digitar apenas `cd` tem o mesmo efeito."
+    },
+    {
+      "id": "t10",
+      "prompt": "Vá para o diretório raiz do sistema.",
+      "accept": ["cd /"],
+      "hint": "a raiz é representada por uma barra",
+      "explain": "`cd /` leva você ao diretório raiz `/`, o topo de toda a árvore de arquivos do Linux."
+    },
+    {
+      "id": "t11",
+      "prompt": "Crie um diretório chamado documentos.",
+      "accept": ["mkdir documentos", "mkdir documentos/", "mkdir ./documentos"],
+      "hint": "make directory",
+      "explain": "`mkdir documentos` (make directory) cria um novo diretório com o nome informado no local atual."
+    },
+    {
+      "id": "t12",
+      "prompt": "Crie a estrutura de pastas aninhadas projetos/app/src de uma só vez.",
+      "accept": ["mkdir -p projetos/app/src", "mkdir -p projetos/app/src/"],
+      "hint": "use a flag -p para criar caminhos aninhados",
+      "explain": "`mkdir -p projetos/app/src` cria toda a árvore de uma vez. A flag `-p` (parents) cria os diretórios pais que ainda não existem, sem dar erro."
+    },
+    {
+      "id": "t13",
+      "prompt": "Volte para o diretório anterior em que você estava (o último visitado).",
+      "accept": ["cd -"],
+      "hint": "um traço representa o anterior",
+      "explain": "`cd -` retorna ao diretório onde você estava antes do último `cd`, alternando entre dois diretórios rapidamente."
+    },
+    {
+      "id": "t14",
+      "prompt": "Liste o conteúdo da sua pasta pessoal usando o atalho da home.",
+      "accept": ["ls ~", "ls ~/"],
+      "hint": "combine ls com o til",
+      "explain": "`ls ~` lista o conteúdo da sua pasta pessoal sem precisar estar dentro dela, usando o atalho `~`."
+    }
+  ]
+}

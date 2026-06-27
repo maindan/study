@@ -1,0 +1,103 @@
+{
+  "intro": "Pratique a **busca de texto**, o uso de **pipes** e o **redirecionamento** no Linux. Comandos principais: `grep`, `find`, `wc`, `sort`, `uniq`, `head`, `tail` e os operadores `|`, `>` e `>>`.",
+  "tasks": [
+    {
+      "id": "t1",
+      "prompt": "Procure a palavra erro dentro do arquivo log.txt.",
+      "accept": ["grep erro log\\.txt"],
+      "hint": "grep PADRÃO ARQUIVO",
+      "explain": "`grep erro log.txt` mostra todas as linhas do arquivo `log.txt` que contêm a palavra `erro`. O primeiro argumento é o padrão e o segundo é o arquivo."
+    },
+    {
+      "id": "t2",
+      "prompt": "Procure a palavra erro em log.txt ignorando maiúsculas e minúsculas (case-insensitive).",
+      "accept": ["grep -i erro log\\.txt", "grep --ignore-case erro log\\.txt"],
+      "hint": "use a flag -i",
+      "explain": "`grep -i` (ignore-case) faz a busca sem diferenciar maiúsculas de minúsculas, encontrando `erro`, `Erro`, `ERRO`, etc."
+    },
+    {
+      "id": "t3",
+      "prompt": "Procure a palavra TODO recursivamente em todos os arquivos do diretório atual.",
+      "accept": ["grep -r TODO \\.", "grep --recursive TODO \\.", "grep -r TODO \\./", "grep -R TODO \\."],
+      "hint": "use a flag -r e o diretório atual (.)",
+      "explain": "`grep -r TODO .` busca recursivamente (`-r`) a palavra `TODO` em todos os arquivos a partir do diretório atual (`.`), descendo pelas subpastas."
+    },
+    {
+      "id": "t4",
+      "prompt": "Mostre quantas linhas em log.txt contêm a palavra erro (apenas a contagem).",
+      "accept": ["grep -c erro log\\.txt", "grep --count erro log\\.txt"],
+      "hint": "use a flag -c (count)",
+      "explain": "`grep -c` (count) não mostra as linhas, apenas o **número** de linhas que casam com o padrão `erro` no arquivo."
+    },
+    {
+      "id": "t5",
+      "prompt": "Encontre, a partir do diretório atual, todos os arquivos com o nome relatorio.txt.",
+      "accept": ["find \\. -name relatorio\\.txt", "find \\./ -name relatorio\\.txt"],
+      "hint": "find CAMINHO -name NOME",
+      "explain": "`find . -name relatorio.txt` procura, a partir do diretório atual (`.`), arquivos cujo nome seja exatamente `relatorio.txt`, percorrendo as subpastas."
+    },
+    {
+      "id": "t6",
+      "prompt": "Encontre, a partir do diretório atual, todos os arquivos com a extensão .log.",
+      "accept": ["find \\. -name \"\\*\\.log\"", "find \\. -name '\\*\\.log'", "find \\. -name \\*\\.log", "find \\./ -name \"\\*\\.log\""],
+      "hint": "use o curinga *.log entre aspas",
+      "explain": "`find . -name \"*.log\"` busca todos os arquivos terminados em `.log`. As aspas evitam que o shell expanda o `*` antes de o `find` recebê-lo."
+    },
+    {
+      "id": "t7",
+      "prompt": "Conte quantas linhas existem no arquivo log.txt.",
+      "accept": ["wc -l log\\.txt"],
+      "hint": "wc -l conta linhas",
+      "explain": "`wc -l` (word count, com `-l` de lines) mostra o número de linhas do arquivo `log.txt`."
+    },
+    {
+      "id": "t8",
+      "prompt": "Liste os arquivos do diretório atual e conte quantos são, usando um pipe.",
+      "accept": ["ls \\| wc -l"],
+      "hint": "ligue ls e wc -l com o operador |",
+      "explain": "O pipe `|` envia a saída de `ls` como entrada de `wc -l`. Como `ls` lista um item por linha quando canalizado, `wc -l` conta quantos itens existem."
+    },
+    {
+      "id": "t9",
+      "prompt": "Ordene as linhas do arquivo nomes.txt em ordem alfabética.",
+      "accept": ["sort nomes\\.txt"],
+      "hint": "o comando sort ordena linhas",
+      "explain": "`sort nomes.txt` exibe as linhas do arquivo ordenadas alfabeticamente (ordem crescente é o padrão)."
+    },
+    {
+      "id": "t10",
+      "prompt": "Ordene as linhas de nomes.txt e remova as linhas duplicadas, usando um pipe.",
+      "accept": ["sort nomes\\.txt \\| uniq"],
+      "hint": "uniq só remove duplicatas adjacentes, por isso ordene antes",
+      "explain": "`uniq` remove apenas linhas **duplicadas adjacentes**. Por isso primeiro usamos `sort` para agrupar iguais e, via pipe `|`, passamos o resultado para `uniq`."
+    },
+    {
+      "id": "t11",
+      "prompt": "Salve a lista de arquivos do diretório atual no arquivo lista.txt (sobrescrevendo o conteúdo).",
+      "accept": ["ls > lista\\.txt"],
+      "hint": "use o operador de redirecionamento >",
+      "explain": "`ls > lista.txt` redireciona a saída de `ls` para o arquivo `lista.txt`. O `>` **sobrescreve** o conteúdo existente (ou cria o arquivo se não existir)."
+    },
+    {
+      "id": "t12",
+      "prompt": "Acrescente o texto da data atual ao final do arquivo log.txt sem apagar o que já existe.",
+      "accept": ["date >> log\\.txt"],
+      "hint": "use o operador >> para acrescentar",
+      "explain": "`>>` **acrescenta** (append) a saída ao final do arquivo, preservando o conteúdo anterior. Aqui a saída do comando `date` é adicionada ao fim de `log.txt`."
+    },
+    {
+      "id": "t13",
+      "prompt": "Mostre as 10 primeiras linhas do arquivo log.txt.",
+      "accept": ["head log\\.txt", "head -n 10 log\\.txt", "head -10 log\\.txt"],
+      "hint": "head mostra o início do arquivo",
+      "explain": "`head` exibe, por padrão, as 10 primeiras linhas do arquivo. Você pode controlar a quantidade com `-n`, por exemplo `head -n 10 log.txt`."
+    },
+    {
+      "id": "t14",
+      "prompt": "Mostre as 5 últimas linhas do arquivo log.txt.",
+      "accept": ["tail -n 5 log\\.txt", "tail -5 log\\.txt"],
+      "hint": "tail mostra o final; use -n 5",
+      "explain": "`tail -n 5 log.txt` mostra as 5 últimas linhas do arquivo. Sem `-n`, `tail` exibe as 10 últimas. É muito usado para acompanhar logs (`tail -f`)."
+    }
+  ]
+}

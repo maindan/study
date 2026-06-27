@@ -1,0 +1,114 @@
+{
+  "intro": "Teste seus conhecimentos sobre arquitetura Android: componentes, Manifest, Intents, padrões e Jetpack.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Qual componente do Android representa uma tela com a qual o usuário interage?",
+      "options": ["Service", "Activity", "BroadcastReceiver", "ContentProvider"],
+      "answer": 1,
+      "explain": "A **Activity** representa uma única tela com interface de usuário e possui um ciclo de vida gerenciado pelo sistema."
+    },
+    {
+      "id": "q2",
+      "q": "Qual componente é usado para compartilhar dados estruturados entre apps diferentes?",
+      "options": ["Service", "Activity", "ContentProvider", "BroadcastReceiver"],
+      "answer": 2,
+      "explain": "O **ContentProvider** gerencia o acesso a dados e permite compartilhá-los entre apps via URIs `content://`, como ao ler os contatos do dispositivo."
+    },
+    {
+      "id": "q3",
+      "q": "Para que serve o BroadcastReceiver?",
+      "options": [
+        "Executar tarefas longas em segundo plano com UI",
+        "Reagir a eventos do sistema ou de outros apps",
+        "Desenhar a interface gráfica do app",
+        "Persistir dados localmente em SQLite"
+      ],
+      "answer": 1,
+      "explain": "O **BroadcastReceiver** permite que o app reaja a eventos (como mudança de conectividade ou bateria fraca), seja registrado no Manifest ou dinamicamente em código."
+    },
+    {
+      "id": "q4",
+      "q": "Qual arquivo descreve os componentes e permissões do app para o sistema operacional antes da execução?",
+      "options": ["build.gradle", "AndroidManifest.xml", "strings.xml", "settings.gradle"],
+      "answer": 1,
+      "explain": "O **AndroidManifest.xml** declara componentes, permissões, recursos exigidos e metadados do app, sendo lido pelo sistema antes de executar qualquer código."
+    },
+    {
+      "id": "q5",
+      "q": "Qual a diferença entre um Intent explícito e um implícito?",
+      "options": [
+        "O explícito indica a classe exata do componente; o implícito descreve apenas a ação desejada",
+        "O explícito é só para Services; o implícito só para Activities",
+        "O implícito indica a classe exata; o explícito descreve a ação",
+        "Não há diferença, são sinônimos"
+      ],
+      "answer": 0,
+      "explain": "Um **Intent explícito** nomeia a classe do componente (usado para navegar dentro do app). Um **Intent implícito** descreve uma ação (ex.: `ACTION_VIEW`) e o sistema escolhe o app capaz de tratá-la."
+    },
+    {
+      "id": "q6",
+      "q": "Como se passam dados simples de uma Activity para outra através de um Intent?",
+      "options": [
+        "Usando variáveis globais estáticas",
+        "Usando extras com putExtra/getExtra",
+        "Salvando sempre no banco de dados antes",
+        "Não é possível passar dados entre Activities"
+      ],
+      "answer": 1,
+      "explain": "Os **extras** são pares chave/valor anexados ao Intent com `putExtra(...)` e recuperados no destino com métodos como `getStringExtra(...)`."
+    },
+    {
+      "id": "q7",
+      "q": "Qual padrão arquitetural é o recomendado oficialmente pelo Google para apps Android modernos?",
+      "options": ["MVC", "MVP", "MVVM", "Singleton"],
+      "answer": 2,
+      "explain": "O **MVVM** é o padrão recomendado: a View observa o estado exposto pelo ViewModel, integrando-se naturalmente com componentes Jetpack como ViewModel e StateFlow."
+    },
+    {
+      "id": "q8",
+      "q": "Na arquitetura em camadas recomendada (UI/domínio/dados), qual é a regra sobre dependências?",
+      "options": [
+        "A camada de dados deve depender da camada de UI",
+        "As camadas de fora dependem das de dentro, nunca o contrário",
+        "Todas as camadas devem depender umas das outras livremente",
+        "O domínio deve conhecer detalhes da UI"
+      ],
+      "answer": 1,
+      "explain": "As dependências apontam para dentro: a UI conhece o domínio, e o domínio não conhece a UI. Isso mantém as regras de negócio isoladas e testáveis."
+    },
+    {
+      "id": "q9",
+      "q": "Qual a principal vantagem do ViewModel do Jetpack?",
+      "options": [
+        "Ele desenha a interface automaticamente",
+        "Ele sobrevive a mudanças de configuração, como girar a tela",
+        "Ele substitui o AndroidManifest.xml",
+        "Ele só funciona com SharedPreferences"
+      ],
+      "answer": 1,
+      "explain": "O **ViewModel** mantém o estado da UI vivo entre recriações da Activity/Fragment (como ao girar o aparelho), evitando perda de dados em memória."
+    },
+    {
+      "id": "q10",
+      "q": "Qual componente Jetpack é a alternativa moderna e tipada ao SQLite para persistência local?",
+      "options": ["DataStore", "Room", "WorkManager", "Navigation"],
+      "answer": 1,
+      "explain": "O **Room** é uma camada sobre o SQLite que mapeia tabelas para objetos Kotlin, valida queries em tempo de compilação e integra com Coroutines e Flow."
+    },
+    {
+      "id": "q11",
+      "q": "Qual componente Jetpack deve ser usado para tarefas em segundo plano que precisam ser executadas com garantia, mesmo após o app fechar?",
+      "options": ["LiveData", "WorkManager", "Lifecycle", "ViewModel"],
+      "answer": 1,
+      "explain": "O **WorkManager** agenda trabalho em segundo plano confiável e adiável, respeitando restrições (rede, bateria) e sobrevivendo ao fechamento do app ou reinício do aparelho."
+    },
+    {
+      "id": "q12",
+      "q": "Qual componente Jetpack substitui o antigo SharedPreferences para salvar preferências de forma assíncrona?",
+      "options": ["Room", "DataStore", "Navigation", "BroadcastReceiver"],
+      "answer": 1,
+      "explain": "O **DataStore** guarda pequenos volumes de dados (preferências) de forma assíncrona usando Coroutines e Flow, sem bloquear a thread principal como fazia o SharedPreferences."
+    }
+  ]
+}

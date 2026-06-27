@@ -1,0 +1,18 @@
+{
+  "title": "Dev Android Nativo",
+  "icon": "📱",
+  "order": 9,
+  "description": "Do ambiente ao app completo: layouts, ciclo de vida, RecyclerView, persistência (Room/SQLite), APIs nativas (câmera, GPS), networking e um projeto final.",
+  "sections": [
+    { "slug": "ambiente", "title": "Ambiente e Projeto", "type": "doc", "file": "01-ambiente.md", "summary": "Android Studio, SDK, Gradle, emulador, estrutura." },
+    { "slug": "primeiro-app", "title": "Seu Primeiro App", "type": "doc", "file": "02-primeiro-app.md", "summary": "Criar, rodar e entender a estrutura de um app." },
+    { "slug": "layouts", "title": "Layouts e UI", "type": "doc", "file": "03-layouts.md", "summary": "XML, ViewGroups, ConstraintLayout e intro ao Compose." },
+    { "slug": "ciclo-de-vida", "title": "Ciclo de Vida", "type": "doc", "file": "04-ciclo-de-vida.md", "summary": "Lifecycle de Activity e Fragment, estado." },
+    { "slug": "interacao-ui", "title": "Listas e Interação", "type": "doc", "file": "05-interacao-ui.md", "summary": "RecyclerView, eventos, navegação entre telas." },
+    { "slug": "persistencia", "title": "Banco de Dados e Persistência", "type": "doc", "file": "06-persistencia.md", "summary": "SharedPreferences, SQLite, Room, arquivos." },
+    { "slug": "apis-nativas", "title": "APIs Nativas do Sistema", "type": "doc", "file": "07-apis-nativas.md", "summary": "Permissões runtime, câmera, GPS, sensores, notificações." },
+    { "slug": "networking", "title": "Networking e APIs REST", "type": "doc", "file": "08-networking.md", "summary": "Retrofit, JSON, corrotinas, consumo de APIs." },
+    { "slug": "app-completo", "title": "Projeto: App Completo", "type": "doc", "file": "09-app-completo.md", "summary": "Juntando tudo num app real, passo a passo." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "10-quiz.json", "summary": "Teste seus conhecimentos de dev Android." }
+  ]
+}

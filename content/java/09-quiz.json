@@ -1,0 +1,139 @@
+{
+  "intro": "Quiz de revisão de **Java**. Cobre strings, exceções, coleções, tipos e POO. Escolha a alternativa correta — a explicação aparece ao responder.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Por que `String` é chamada de imutável em Java?",
+      "options": [
+        "Porque não pode ser declarada como variável",
+        "Porque seu conteúdo nunca muda após a criação; métodos retornam novas Strings",
+        "Porque só pode conter letras maiúsculas",
+        "Porque ocupa sempre o mesmo número de bytes"
+      ],
+      "answer": 1,
+      "explain": "Uma `String` é **imutável**: uma vez criada, seu conteúdo não muda. Métodos como `toUpperCase()` ou `replace()` retornam uma **nova** String em vez de alterar a original."
+    },
+    {
+      "id": "q2",
+      "q": "Para comparar o conteúdo de duas Strings, o correto é usar:",
+      "options": [
+        "==",
+        "equals()",
+        "compareTo() == 1",
+        "o operador ="
+      ],
+      "answer": 1,
+      "explain": "`==` compara **referências** (se é o mesmo objeto na memória). Para comparar o **conteúdo**, use `equals()`. Essa é uma das maiores armadilhas de Java."
+    },
+    {
+      "id": "q3",
+      "q": "Qual classe é a melhor escolha para montar uma String concatenando muitos pedaços dentro de um loop?",
+      "options": [
+        "String com operador +",
+        "StringBuilder",
+        "Scanner",
+        "Math"
+      ],
+      "answer": 1,
+      "explain": "Como cada `+` em Strings cria um novo objeto, usar `StringBuilder` (que é mutável) é muito mais eficiente para construir texto em loops, via `append()`."
+    },
+    {
+      "id": "q4",
+      "q": "Qual será a saída de `System.out.println(Math.max(3, 8));`?",
+      "options": ["3", "8", "11", "5"],
+      "answer": 1,
+      "explain": "`Math.max(a, b)` retorna o **maior** dos dois valores. Entre 3 e 8, o maior é 8."
+    },
+    {
+      "id": "q5",
+      "q": "O que faz o autoboxing em Java?",
+      "options": [
+        "Converte automaticamente entre primitivo e sua classe wrapper (ex.: int ↔ Integer)",
+        "Empacota classes em arquivos .jar",
+        "Cria caixas de diálogo na tela",
+        "Comprime objetos na memória"
+      ],
+      "answer": 0,
+      "explain": "**Autoboxing** é a conversão automática de um tipo primitivo para o objeto wrapper correspondente (ex.: `int` → `Integer`), e o **unboxing** faz o caminho inverso. É o que permite `list.add(5)` em um `List<Integer>`."
+    },
+    {
+      "id": "q6",
+      "q": "Em um bloco try/catch/finally, quando o bloco `finally` é executado?",
+      "options": [
+        "Somente quando ocorre uma exceção",
+        "Somente quando NÃO ocorre exceção",
+        "Sempre, ocorrendo exceção ou não",
+        "Nunca, é apenas decorativo"
+      ],
+      "answer": 2,
+      "explain": "O `finally` é **sempre** executado, com ou sem exceção. Por isso é usado para liberar recursos (fechar arquivos, conexões), garantindo a limpeza."
+    },
+    {
+      "id": "q7",
+      "q": "Qual destas é uma exceção CHECKED (verificada em tempo de compilação)?",
+      "options": [
+        "NullPointerException",
+        "ArithmeticException",
+        "IOException",
+        "ArrayIndexOutOfBoundsException"
+      ],
+      "answer": 2,
+      "explain": "`IOException` é **checked**: o compilador obriga a tratá-la (try/catch) ou declará-la com `throws`. As demais herdam de `RuntimeException` e são **unchecked**."
+    },
+    {
+      "id": "q8",
+      "q": "Qual a diferença entre `throw` e `throws`?",
+      "options": [
+        "São sinônimos exatos",
+        "`throw` dispara uma exceção; `throws` declara que um método pode lançá-la",
+        "`throws` dispara; `throw` declara",
+        "Ambos só funcionam com Error, não com Exception"
+      ],
+      "answer": 1,
+      "explain": "`throw` é usado **dentro** do método para lançar uma exceção (`throw new ...`). `throws` aparece na **assinatura** do método, declarando que ele pode propagar aquela exceção ao chamador."
+    },
+    {
+      "id": "q9",
+      "q": "Qual a vantagem do try-with-resources?",
+      "options": [
+        "Executa o código mais rápido",
+        "Fecha automaticamente recursos AutoCloseable, mesmo se ocorrer exceção",
+        "Captura todas as exceções sem precisar de catch",
+        "Impede que exceções sejam lançadas"
+      ],
+      "answer": 1,
+      "explain": "O `try-with-resources` chama `close()` automaticamente em qualquer recurso `AutoCloseable` declarado nos parênteses, mesmo havendo exceção. Isso elimina o `finally` manual e evita vazamento de recursos."
+    },
+    {
+      "id": "q10",
+      "q": "Para que serve a classe `Scanner`?",
+      "options": [
+        "Escanear vírus no código",
+        "Ler entrada de dados, por exemplo do teclado (System.in)",
+        "Comparar Strings",
+        "Formatar números decimais"
+      ],
+      "answer": 1,
+      "explain": "`Scanner` lê entrada de várias fontes. Com `new Scanner(System.in)` você lê do teclado usando métodos como `nextLine()`, `nextInt()` e `nextDouble()`."
+    },
+    {
+      "id": "q11",
+      "q": "Qual estrutura associa **chaves a valores** com busca rápida por chave?",
+      "options": ["ArrayList", "HashSet", "HashMap", "LinkedList"],
+      "answer": 2,
+      "explain": "`HashMap` armazena pares **chave → valor** e oferece busca por chave em tempo praticamente constante. As chaves são únicas e a ordem não é garantida."
+    },
+    {
+      "id": "q12",
+      "q": "O que `Integer.parseInt(\"123\")` retorna?",
+      "options": [
+        "A String \"123\"",
+        "O int 123",
+        "Um erro de compilação",
+        "O double 123.0"
+      ],
+      "answer": 1,
+      "explain": "`Integer.parseInt` converte uma String em um `int`. `Integer.parseInt(\"123\")` devolve o número inteiro `123`. Se a String não for um número válido, lança `NumberFormatException`."
+    }
+  ]
+}

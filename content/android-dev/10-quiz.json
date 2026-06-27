@@ -1,0 +1,165 @@
+{
+  "intro": "Quiz do módulo Dev Android Nativo (Kotlin). Cobre desde o ambiente e o primeiro app até persistência com Room, APIs nativas, networking com Retrofit e arquitetura MVVM. Responda e confira as explicações.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Qual é a linguagem oficial recomendada pelo Google para desenvolvimento Android moderno?",
+      "options": ["Java", "Kotlin", "Dart", "Swift"],
+      "answer": 1,
+      "explain": "Desde 2019 o **Kotlin** é a linguagem oficial e preferencial para Android, com sintaxe concisa, segurança contra nulos e suporte a corrotinas. Java ainda funciona, mas Kotlin é o padrão atual."
+    },
+    {
+      "id": "q2",
+      "q": "No arquivo build.gradle, o que o campo `minSdk` define?",
+      "options": [
+        "A versão do SDK usada para compilar o app",
+        "A versão mais recente do Android disponível",
+        "A versão mais antiga do Android em que o app pode rodar",
+        "A versão do Android Studio"
+      ],
+      "answer": 2,
+      "explain": "O `minSdk` define a **versão mais antiga** do Android suportada. `compileSdk` é a versão usada para compilar e `targetSdk` é a versão testada/alvo."
+    },
+    {
+      "id": "q3",
+      "q": "Qual método da Activity é o primeiro a ser chamado e onde geralmente fazemos `setContentView`?",
+      "options": ["onResume()", "onStart()", "onCreate()", "onDestroy()"],
+      "answer": 2,
+      "explain": "O `onCreate()` é chamado uma única vez quando a Activity é criada. É nele que inflamos o layout com `setContentView` e inicializamos a interface."
+    },
+    {
+      "id": "q4",
+      "q": "Qual unidade deve ser usada para definir o tamanho de TEXTO em layouts Android?",
+      "options": ["px", "dp", "sp", "pt"],
+      "answer": 2,
+      "explain": "Use **sp** (scale-independent pixels) para texto, pois respeita a configuração de tamanho de fonte do usuário (acessibilidade). Para outras dimensões, use **dp**."
+    },
+    {
+      "id": "q5",
+      "q": "Qual é a vantagem do ViewBinding sobre o findViewById?",
+      "options": [
+        "É mais lento, porém mais seguro",
+        "Gera referências tipadas e seguras, evitando erros de id em tempo de execução",
+        "Permite acessar Views sem declarar id no XML",
+        "Substitui a necessidade de layouts XML"
+      ],
+      "answer": 1,
+      "explain": "O **ViewBinding** gera uma classe com referências **tipadas** para cada View do layout, eliminando casts e o risco de `NullPointerException` por id incorreto, problemas comuns com `findViewById`."
+    },
+    {
+      "id": "q6",
+      "q": "Ao girar a tela, por padrão o Android destrói e recria a Activity. Qual é a forma RECOMENDADA de preservar os dados da tela?",
+      "options": [
+        "Usar variáveis estáticas globais",
+        "Desativar a rotação da tela",
+        "Usar um ViewModel, que sobrevive a mudanças de configuração",
+        "Salvar tudo em SharedPreferences a cada frame"
+      ],
+      "answer": 2,
+      "explain": "O **ViewModel** sobrevive às mudanças de configuração (como rotação), mantendo o estado separado da Activity. Para dados pequenos de UI também existe `onSaveInstanceState`, mas o ViewModel é a abordagem moderna recomendada."
+    },
+    {
+      "id": "q7",
+      "q": "Quais são os três componentes obrigatórios de um Adapter de RecyclerView?",
+      "options": [
+        "onCreate, onBind, onDestroy",
+        "onCreateViewHolder, onBindViewHolder, getItemCount",
+        "inflate, bind, recycle",
+        "onAttach, onDraw, onDetach"
+      ],
+      "answer": 1,
+      "explain": "Um Adapter precisa implementar `onCreateViewHolder` (cria o item), `onBindViewHolder` (liga os dados ao item) e `getItemCount` (quantidade de itens). A RecyclerView recicla as Views para eficiência."
+    },
+    {
+      "id": "q8",
+      "q": "Para passar dados de uma Activity para outra ao iniciá-la, usamos:",
+      "options": [
+        "Variáveis globais",
+        "intent.putExtra(...) e startActivity(intent)",
+        "SharedPreferences obrigatoriamente",
+        "O método setResult diretamente"
+      ],
+      "answer": 1,
+      "explain": "Anexamos dados ao `Intent` com `putExtra(chave, valor)` e iniciamos a tela com `startActivity(intent)`. Na tela de destino, recuperamos com `intent.getStringExtra(...)`, `getIntExtra(...)`, etc."
+    },
+    {
+      "id": "q9",
+      "q": "Quais são os três componentes principais da biblioteca Room?",
+      "options": [
+        "Model, View, Controller",
+        "Entity, DAO e Database",
+        "Repository, Service e Provider",
+        "Cursor, Query e Table"
+      ],
+      "answer": 1,
+      "explain": "O Room é formado por **Entity** (representa a tabela), **DAO** (interface com as operações de acesso) e **Database** (classe abstrata que conecta tudo). Ele verifica as queries em tempo de compilação."
+    },
+    {
+      "id": "q10",
+      "q": "Por que os métodos de escrita do DAO no Room costumam ser marcados como `suspend`?",
+      "options": [
+        "Para deixar o código mais bonito",
+        "Porque operações de banco não podem rodar na thread principal; suspend permite usá-las em corrotinas",
+        "Porque o Room exige isso para qualquer método",
+        "Para que o método nunca retorne valor"
+      ],
+      "answer": 1,
+      "explain": "Acesso a banco de dados é uma operação que pode demorar e **não pode bloquear a thread principal (UI)**. Marcando como `suspend`, o método roda dentro de uma corrotina, fora da UI, sem travar o app."
+    },
+    {
+      "id": "q11",
+      "q": "Desde o Android 6 (API 23), permissões 'perigosas' como câmera e localização precisam ser:",
+      "options": [
+        "Apenas declaradas no AndroidManifest.xml",
+        "Compradas na Play Store",
+        "Solicitadas ao usuário em tempo de execução (runtime)",
+        "Concedidas automaticamente pelo sistema"
+      ],
+      "answer": 2,
+      "explain": "Permissões perigosas devem ser declaradas no manifesto **e** solicitadas em **runtime** ao usuário, usando APIs como `ActivityResultContracts.RequestPermission`. O usuário pode conceder ou negar a qualquer momento."
+    },
+    {
+      "id": "q12",
+      "q": "Qual classe é recomendada para obter a localização do dispositivo de forma eficiente?",
+      "options": [
+        "LocationManager diretamente",
+        "FusedLocationProviderClient (Google Play Services)",
+        "GPSManager",
+        "SensorManager"
+      ],
+      "answer": 1,
+      "explain": "O **FusedLocationProviderClient** combina GPS, Wi-Fi e rede para fornecer a localização de forma eficiente e econômica em bateria. É a abordagem recomendada via Google Play Services."
+    },
+    {
+      "id": "q13",
+      "q": "Qual biblioteca é o padrão para consumir APIs REST no Android, descrevendo endpoints com uma interface Kotlin?",
+      "options": ["Volley", "OkHttp puro", "Retrofit", "HttpURLConnection"],
+      "answer": 2,
+      "explain": "O **Retrofit** permite descrever a API com uma interface anotada (`@GET`, `@POST`, etc.) e funções `suspend`, retornando objetos já desserializados (via Gson ou Moshi). É o padrão de mercado para REST no Android."
+    },
+    {
+      "id": "q14",
+      "q": "Na arquitetura MVVM, qual é a responsabilidade principal do ViewModel?",
+      "options": [
+        "Desenhar os pixels na tela",
+        "Guardar o estado da tela e a lógica, sobrevivendo a mudanças de configuração",
+        "Acessar diretamente o hardware do aparelho",
+        "Substituir o AndroidManifest.xml"
+      ],
+      "answer": 1,
+      "explain": "No **MVVM**, o ViewModel mantém o estado e a lógica da tela, isolando-os da View (Activity/Fragment). Ele sobrevive à rotação e expõe dados observáveis (LiveData/StateFlow), enquanto a View apenas exibe e captura eventos."
+    },
+    {
+      "id": "q15",
+      "q": "Por que o DAO do Room frequentemente retorna um `Flow<List<...>>` em vez de apenas `List<...>`?",
+      "options": [
+        "Porque Flow é mais rápido para inserir dados",
+        "Porque o Flow emite uma nova lista automaticamente sempre que os dados no banco mudam, permitindo UI reativa",
+        "Porque o Room não suporta retornar listas simples",
+        "Porque Flow criptografa os dados"
+      ],
+      "answer": 1,
+      "explain": "Um `Flow` é um fluxo observável: quando os dados da tabela mudam (insert/update/delete), o Room **emite uma nova lista automaticamente**. A View, coletando esse Flow, atualiza sozinha — base da arquitetura reativa moderna."
+    }
+  ]
+}

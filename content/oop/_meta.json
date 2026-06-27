@@ -1,0 +1,16 @@
+{
+  "title": "Orientação a Objetos",
+  "icon": "🧩",
+  "order": 4,
+  "description": "Os pilares da Programação Orientada a Objetos: encapsulamento, herança, polimorfismo, abstração e princípios SOLID.",
+  "sections": [
+    { "slug": "introducao", "title": "Introdução à POO", "type": "doc", "file": "01-introducao.md", "summary": "Paradigmas, objetos do mundo real, vantagens." },
+    { "slug": "classes-e-objetos", "title": "Classes e Objetos", "type": "doc", "file": "02-classes-e-objetos.md", "summary": "Atributos, métodos, instâncias, construtores." },
+    { "slug": "encapsulamento", "title": "Encapsulamento", "type": "doc", "file": "03-encapsulamento.md", "summary": "Modificadores de acesso, getters/setters." },
+    { "slug": "heranca", "title": "Herança", "type": "doc", "file": "04-heranca.md", "summary": "Reuso, superclasse/subclasse, super, override." },
+    { "slug": "polimorfismo", "title": "Polimorfismo", "type": "doc", "file": "05-polimorfismo.md", "summary": "Sobrescrita, sobrecarga, ligação dinâmica." },
+    { "slug": "abstracao-interfaces", "title": "Abstração e Interfaces", "type": "doc", "file": "06-abstracao-interfaces.md", "summary": "Classes abstratas, interfaces, contratos." },
+    { "slug": "solid", "title": "Princípios SOLID", "type": "doc", "file": "07-solid.md", "summary": "Os 5 princípios para um bom design OO." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "08-quiz.json", "summary": "Teste seus conhecimentos de POO." }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "intro": "Quiz de revisão dos fundamentos de **Linux**: navegação, arquivos, permissões, busca de texto, pipes e processos. Escolha a alternativa correta em cada pergunta.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Qual comando mostra o caminho do diretório de trabalho atual?",
+      "options": ["pwd", "cd", "ls", "whoami"],
+      "answer": 0,
+      "explain": "`pwd` (print working directory) imprime o caminho absoluto do diretório onde você está."
+    },
+    {
+      "id": "q2",
+      "q": "O que faz o comando `ls -a`?",
+      "options": [
+        "Ordena os arquivos por tamanho",
+        "Lista também os arquivos ocultos (que começam com ponto)",
+        "Apaga todos os arquivos",
+        "Mostra apenas diretórios"
+      ],
+      "answer": 1,
+      "explain": "A flag `-a` (all) faz o `ls` exibir também os arquivos ocultos, cujos nomes começam com `.` (ex.: `.bashrc`)."
+    },
+    {
+      "id": "q3",
+      "q": "Qual comando cria a estrutura de pastas aninhadas `a/b/c` de uma só vez, criando os diretórios pais que faltarem?",
+      "options": ["mkdir a/b/c", "mkdir -p a/b/c", "touch a/b/c", "cd -p a/b/c"],
+      "answer": 1,
+      "explain": "`mkdir -p a/b/c` usa a flag `-p` (parents) para criar toda a árvore de diretórios de uma vez, sem erro caso os pais não existam."
+    },
+    {
+      "id": "q4",
+      "q": "Para remover um diretório e todo o seu conteúdo de forma recursiva, qual comando usar?",
+      "options": ["rm arquivo", "rmdir pasta", "rm -r pasta", "del pasta"],
+      "answer": 2,
+      "explain": "`rm -r pasta` remove recursivamente o diretório e tudo dentro dele. Já `rmdir` só remove diretórios vazios."
+    },
+    {
+      "id": "q5",
+      "q": "Na notação numérica de permissões, o que significa `chmod 755 script.sh`?",
+      "options": [
+        "Dono: leitura/escrita/execução; grupo e outros: leitura/execução",
+        "Todos têm permissão total (leitura, escrita e execução)",
+        "Ninguém pode executar o arquivo",
+        "Apenas o root pode ler o arquivo"
+      ],
+      "answer": 0,
+      "explain": "Em `755`: o dono tem 7 (rwx = ler+escrever+executar) e o grupo e os outros têm 5 (r-x = ler+executar). Cada dígito é a soma de 4 (r) + 2 (w) + 1 (x)."
+    },
+    {
+      "id": "q6",
+      "q": "O que o operador pipe `|` faz em `ls | wc -l`?",
+      "options": [
+        "Salva a saída de ls em um arquivo",
+        "Executa os dois comandos em paralelo",
+        "Envia a saída do comando da esquerda como entrada do comando da direita",
+        "Compara a saída dos dois comandos"
+      ],
+      "answer": 2,
+      "explain": "O pipe `|` conecta comandos: a saída padrão do comando à esquerda vira a entrada padrão do comando à direita. Em `ls | wc -l`, a lista de `ls` é contada por `wc -l`."
+    },
+    {
+      "id": "q7",
+      "q": "Qual a diferença entre os operadores `>` e `>>` no redirecionamento de saída?",
+      "options": [
+        "`>` acrescenta ao final; `>>` sobrescreve o arquivo",
+        "`>` sobrescreve o arquivo; `>>` acrescenta ao final",
+        "Os dois fazem exatamente a mesma coisa",
+        "`>` lê do arquivo; `>>` escreve no arquivo"
+      ],
+      "answer": 1,
+      "explain": "`>` sobrescreve o conteúdo do arquivo (ou o cria). `>>` acrescenta (append) ao final, preservando o que já existia."
+    },
+    {
+      "id": "q8",
+      "q": "Qual comando busca a palavra `erro` dentro de um arquivo, ignorando maiúsculas e minúsculas?",
+      "options": [
+        "grep -r erro arquivo.txt",
+        "grep -i erro arquivo.txt",
+        "find erro arquivo.txt",
+        "grep -v erro arquivo.txt"
+      ],
+      "answer": 1,
+      "explain": "`grep -i` (ignore-case) faz a busca sem diferenciar maiúsculas de minúsculas. `-r` é recursivo e `-v` inverte a busca."
+    },
+    {
+      "id": "q9",
+      "q": "Qual comando é usado para localizar arquivos pelo nome a partir de um diretório?",
+      "options": [
+        "grep -name arquivo.txt",
+        "ls -name arquivo.txt",
+        "find . -name arquivo.txt",
+        "locate -r arquivo.txt"
+      ],
+      "answer": 2,
+      "explain": "`find . -name arquivo.txt` percorre o diretório atual e suas subpastas procurando arquivos cujo nome case com o informado."
+    },
+    {
+      "id": "q10",
+      "q": "Por que normalmente se usa `sort` antes de `uniq` (ex.: `sort nomes.txt | uniq`)?",
+      "options": [
+        "Porque uniq remove apenas linhas duplicadas que estão adjacentes",
+        "Porque uniq não funciona com pipes",
+        "Porque sort apaga as linhas duplicadas",
+        "Porque uniq exige arquivos em ordem decrescente"
+      ],
+      "answer": 0,
+      "explain": "`uniq` só elimina duplicatas **adjacentes**. Ordenar antes com `sort` agrupa as linhas iguais, garantindo que todas as duplicatas sejam removidas."
+    },
+    {
+      "id": "q11",
+      "q": "Qual comando mostra as últimas linhas de um arquivo (útil para acompanhar logs)?",
+      "options": ["head", "tail", "cat", "wc"],
+      "answer": 1,
+      "explain": "`tail` mostra o final do arquivo (10 últimas linhas por padrão). Com `tail -f` é possível acompanhar um arquivo em tempo real. `head` mostra o início."
+    },
+    {
+      "id": "q12",
+      "q": "Qual comando encerra (mata) um processo a partir do seu PID?",
+      "options": ["ps PID", "top PID", "kill PID", "grep PID"],
+      "answer": 2,
+      "explain": "`kill PID` envia um sinal de término ao processo identificado pelo PID. Use `ps` ou `top` para descobrir o PID antes."
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "intro": "15 desafios **avançados**. Aqui combinamos padrões: two pointers sofisticados, deque, busca binária modificada, prefix/hashing e manipulação de matrizes. São clássicos de entrevista — vale memorizar as soluções.",
+  "challenges": [
+    {
+      "id": "trapping-rain-water",
+      "title": "Trapping Rain Water",
+      "difficulty": "avancado",
+      "statement": "Dado um mapa de alturas, calcule quanta **água** fica retida após a chuva.\n\n**Exemplo:** `[0,1,0,2,1,0,1,3,2,1,2,1]` → `6`",
+      "starter": "class Solution {\n    static int trap(int[] height) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int trap(int[] height) {\n        int l = 0, r = height.length - 1, lm = 0, rm = 0, res = 0;\n        while (l < r) {\n            if (height[l] < height[r]) {\n                lm = Math.max(lm, height[l]);\n                res += lm - height[l]; l++;\n            } else {\n                rm = Math.max(rm, height[r]);\n                res += rm - height[r]; r--;\n            }\n        }\n        return res;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.trap(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));\n        System.out.println(Solution.trap(new int[]{4,2,0,3,2,5}));\n        System.out.println(Solution.trap(new int[]{}));\n        System.out.println(Solution.trap(new int[]{1,2,3}));\n    }\n}",
+      "hints": [
+        "Two pointers guardando o máximo da esquerda (lm) e da direita (rm).",
+        "A água em cada posição é min(lm, rm) - altura."
+      ],
+      "expected": "6\n9\n0\n0"
+    },
+    {
+      "id": "max-product-subarray",
+      "title": "Produto Máximo de Subarray",
+      "difficulty": "avancado",
+      "statement": "Encontre o subarray contíguo com o **maior produto**.\n\n**Exemplo:** `[2,3,-2,4]` → `6`",
+      "starter": "class Solution {\n    static int maxProduct(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maxProduct(int[] nums) {\n        int max = nums[0], min = nums[0], res = nums[0];\n        for (int i = 1; i < nums.length; i++) {\n            int n = nums[i];\n            if (n < 0) { int t = max; max = min; min = t; }\n            max = Math.max(n, max * n);\n            min = Math.min(n, min * n);\n            res = Math.max(res, max);\n        }\n        return res;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maxProduct(new int[]{2,3,-2,4}));\n        System.out.println(Solution.maxProduct(new int[]{-2,0,-1}));\n        System.out.println(Solution.maxProduct(new int[]{-2,3,-4}));\n        System.out.println(Solution.maxProduct(new int[]{-2}));\n    }\n}",
+      "hints": [
+        "Um negativo inverte max e min — guarde os dois.",
+        "Ao ver um negativo, troque max com min antes de multiplicar."
+      ],
+      "expected": "6\n0\n24\n-2"
+    },
+    {
+      "id": "longest-consecutive",
+      "title": "Maior Sequência Consecutiva",
+      "difficulty": "avancado",
+      "statement": "Retorne o comprimento da maior sequência de números **consecutivos** (não precisa estar ordenada). Faça em `O(n)`.\n\n**Exemplo:** `[100,4,200,1,3,2]` → `4` (`1,2,3,4`)",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int longestConsecutive(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int longestConsecutive(int[] nums) {\n        Set<Integer> set = new HashSet<>();\n        for (int n : nums) set.add(n);\n        int best = 0;\n        for (int n : set) {\n            if (!set.contains(n - 1)) {\n                int cur = n, len = 1;\n                while (set.contains(cur + 1)) { cur++; len++; }\n                best = Math.max(best, len);\n            }\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.longestConsecutive(new int[]{100,4,200,1,3,2}));\n        System.out.println(Solution.longestConsecutive(new int[]{0,3,7,2,5,8,4,6,0,1}));\n        System.out.println(Solution.longestConsecutive(new int[]{}));\n        System.out.println(Solution.longestConsecutive(new int[]{1,2,0,1}));\n    }\n}",
+      "hints": [
+        "Use um HashSet. Só comece a contar a partir de um número que NÃO tem antecessor no set.",
+        "Isso garante O(n) no total."
+      ],
+      "expected": "4\n9\n0\n3"
+    },
+    {
+      "id": "three-sum",
+      "title": "3Sum",
+      "difficulty": "avancado",
+      "statement": "Retorne todas as **triplas únicas** `[a,b,c]` com soma `0`. A saída deve estar ordenada (triplas ordenadas internamente e a lista ordenada).\n\n**Exemplo:** `[-1,0,1,2,-1,-4]` → `[[-1, -1, 2], [-1, 0, 1]]`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static List<List<Integer>> threeSum(int[] nums) {\n        // escreva sua solução\n        return new ArrayList<>();\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static List<List<Integer>> threeSum(int[] nums) {\n        Arrays.sort(nums);\n        List<List<Integer>> res = new ArrayList<>();\n        for (int i = 0; i < nums.length - 2; i++) {\n            if (i > 0 && nums[i] == nums[i - 1]) continue;\n            int l = i + 1, r = nums.length - 1;\n            while (l < r) {\n                int s = nums[i] + nums[l] + nums[r];\n                if (s == 0) {\n                    res.add(Arrays.asList(nums[i], nums[l], nums[r]));\n                    while (l < r && nums[l] == nums[l + 1]) l++;\n                    while (l < r && nums[r] == nums[r - 1]) r--;\n                    l++; r--;\n                } else if (s < 0) l++;\n                else r--;\n            }\n        }\n        return res;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.threeSum(new int[]{-1,0,1,2,-1,-4}));\n        System.out.println(Solution.threeSum(new int[]{0,1,1}));\n        System.out.println(Solution.threeSum(new int[]{0,0,0}));\n        System.out.println(Solution.threeSum(new int[]{-2,0,1,1,2}));\n    }\n}",
+      "hints": [
+        "Ordene primeiro. Fixe nums[i] e use two pointers no resto.",
+        "Pule duplicatas para não repetir triplas."
+      ],
+      "expected": "[[-1, -1, 2], [-1, 0, 1]]\n[]\n[[0, 0, 0]]\n[[-2, 0, 2], [-2, 1, 1]]"
+    },
+    {
+      "id": "longest-substring-sem-repetir",
+      "title": "Maior Substring sem Repetição",
+      "difficulty": "avancado",
+      "statement": "Retorne o comprimento da maior substring **sem caracteres repetidos**.\n\n**Exemplo:** `\"abcabcbb\"` → `3` (`\"abc\"`)",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int lengthOfLongestSubstring(String s) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int lengthOfLongestSubstring(String s) {\n        Map<Character, Integer> ultima = new HashMap<>();\n        int best = 0, ini = 0;\n        for (int fim = 0; fim < s.length(); fim++) {\n            char c = s.charAt(fim);\n            if (ultima.containsKey(c) && ultima.get(c) >= ini)\n                ini = ultima.get(c) + 1;\n            ultima.put(c, fim);\n            best = Math.max(best, fim - ini + 1);\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.lengthOfLongestSubstring(\"abcabcbb\"));\n        System.out.println(Solution.lengthOfLongestSubstring(\"bbbbb\"));\n        System.out.println(Solution.lengthOfLongestSubstring(\"pwwkew\"));\n        System.out.println(Solution.lengthOfLongestSubstring(\"\"));\n    }\n}",
+      "hints": [
+        "Sliding window: guarde o último índice de cada caractere.",
+        "Ao repetir, mova o início para depois da ocorrência anterior."
+      ],
+      "expected": "3\n1\n3\n0"
+    },
+    {
+      "id": "sliding-window-maximum",
+      "title": "Máximo da Janela Deslizante",
+      "difficulty": "avancado",
+      "statement": "Para cada janela de tamanho `k`, retorne o **máximo**. Use um deque de índices — `O(n)`.\n\n**Exemplo:** `[1,3,-1,-3,5,3,6,7], k=3` → `[3,3,5,5,6,7]`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int[] maxSlidingWindow(int[] nums, int k) {\n        // escreva sua solução\n        return new int[]{};\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int[] maxSlidingWindow(int[] nums, int k) {\n        if (nums.length == 0 || k == 0) return new int[]{};\n        Deque<Integer> dq = new ArrayDeque<>();\n        int[] res = new int[nums.length - k + 1];\n        int idx = 0;\n        for (int i = 0; i < nums.length; i++) {\n            while (!dq.isEmpty() && dq.peekFirst() <= i - k) dq.pollFirst();\n            while (!dq.isEmpty() && nums[dq.peekLast()] < nums[i]) dq.pollLast();\n            dq.offerLast(i);\n            if (i >= k - 1) res[idx++] = nums[dq.peekFirst()];\n        }\n        return res;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7}, 3)));\n        System.out.println(Arrays.toString(Solution.maxSlidingWindow(new int[]{1}, 1)));\n        System.out.println(Arrays.toString(Solution.maxSlidingWindow(new int[]{9,11}, 2)));\n        System.out.println(Arrays.toString(Solution.maxSlidingWindow(new int[]{4,3,2,1}, 2)));\n    }\n}",
+      "hints": [
+        "Deque guarda índices em ordem decrescente de valor.",
+        "Remova da frente o que saiu da janela; remova do fim os menores que o atual."
+      ],
+      "expected": "[3, 3, 5, 5, 6, 7]\n[1]\n[11]\n[4, 3, 2]"
+    },
+    {
+      "id": "merge-intervals",
+      "title": "Mesclar Intervalos",
+      "difficulty": "avancado",
+      "statement": "Una todos os intervalos que se **sobrepõem**.\n\n**Exemplo:** `[[1,3],[2,6],[8,10],[15,18]]` → `[[1, 6], [8, 10], [15, 18]]`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int[][] merge(int[][] intervals) {\n        // escreva sua solução\n        return intervals;\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int[][] merge(int[][] intervals) {\n        if (intervals.length == 0) return new int[0][];\n        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));\n        List<int[]> res = new ArrayList<>();\n        int[] cur = intervals[0].clone();\n        for (int i = 1; i < intervals.length; i++) {\n            if (intervals[i][0] <= cur[1]) cur[1] = Math.max(cur[1], intervals[i][1]);\n            else { res.add(cur); cur = intervals[i].clone(); }\n        }\n        res.add(cur);\n        return res.toArray(new int[0][]);\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.deepToString(Solution.merge(new int[][]{{1,3},{2,6},{8,10},{15,18}})));\n        System.out.println(Arrays.deepToString(Solution.merge(new int[][]{{1,4},{4,5}})));\n        System.out.println(Arrays.deepToString(Solution.merge(new int[][]{{1,4},{2,3}})));\n    }\n}",
+      "hints": [
+        "Ordene por início. Se o próximo começa antes do fim atual, estenda o fim.",
+        "Senão, feche o intervalo atual e comece outro."
+      ],
+      "expected": "[[1, 6], [8, 10], [15, 18]]\n[[1, 5]]\n[[1, 4]]"
+    },
+    {
+      "id": "insert-interval",
+      "title": "Inserir Intervalo",
+      "difficulty": "avancado",
+      "statement": "Dada uma lista de intervalos **ordenados e sem sobreposição**, insira `novo` mesclando se necessário.\n\n**Exemplo:** intervals `[[1,3],[6,9]]`, novo `[2,5]` → `[[1, 5], [6, 9]]`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int[][] insert(int[][] intervals, int[] novo) {\n        // escreva sua solução\n        return intervals;\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int[][] insert(int[][] intervals, int[] novo) {\n        List<int[]> res = new ArrayList<>();\n        int i = 0, n = intervals.length;\n        while (i < n && intervals[i][1] < novo[0]) res.add(intervals[i++]);\n        int[] m = novo.clone();\n        while (i < n && intervals[i][0] <= m[1]) {\n            m[0] = Math.min(m[0], intervals[i][0]);\n            m[1] = Math.max(m[1], intervals[i][1]);\n            i++;\n        }\n        res.add(m);\n        while (i < n) res.add(intervals[i++]);\n        return res.toArray(new int[0][]);\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.deepToString(Solution.insert(new int[][]{{1,3},{6,9}}, new int[]{2,5})));\n        System.out.println(Arrays.deepToString(Solution.insert(new int[][]{{1,2},{3,5},{6,7},{8,10},{12,16}}, new int[]{4,8})));\n        System.out.println(Arrays.deepToString(Solution.insert(new int[][]{}, new int[]{5,7})));\n    }\n}",
+      "hints": [
+        "Três fases: antes do novo, mesclando com o novo, depois do novo."
+      ],
+      "expected": "[[1, 5], [6, 9]]\n[[1, 2], [3, 10], [12, 16]]\n[[5, 7]]"
+    },
+    {
+      "id": "next-permutation",
+      "title": "Próxima Permutação",
+      "difficulty": "avancado",
+      "statement": "Transforme o array na **próxima permutação** em ordem lexicográfica (in-place). Se for a maior, volte para a menor (ordenada). Retorne o array.\n\n**Exemplo:** `[1,2,3]` → `[1,3,2]`",
+      "starter": "class Solution {\n    static int[] nextPermutation(int[] nums) {\n        // escreva sua solução\n        return nums;\n    }\n}",
+      "reference": "class Solution {\n    static int[] nextPermutation(int[] nums) {\n        int i = nums.length - 2;\n        while (i >= 0 && nums[i] >= nums[i + 1]) i--;\n        if (i >= 0) {\n            int j = nums.length - 1;\n            while (nums[j] <= nums[i]) j--;\n            troca(nums, i, j);\n        }\n        reverter(nums, i + 1, nums.length - 1);\n        return nums;\n    }\n    static void troca(int[] a, int i, int j) { int t = a[i]; a[i] = a[j]; a[j] = t; }\n    static void reverter(int[] a, int i, int j) { while (i < j) troca(a, i++, j--); }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.nextPermutation(new int[]{1,2,3})));\n        System.out.println(Arrays.toString(Solution.nextPermutation(new int[]{3,2,1})));\n        System.out.println(Arrays.toString(Solution.nextPermutation(new int[]{1,1,5})));\n        System.out.println(Arrays.toString(Solution.nextPermutation(new int[]{1,3,2})));\n    }\n}",
+      "hints": [
+        "Ache o primeiro descida da direita para a esquerda (pivô).",
+        "Troque o pivô pelo próximo maior à direita e inverta o sufixo."
+      ],
+      "expected": "[1, 3, 2]\n[1, 2, 3]\n[1, 5, 1]\n[2, 1, 3]"
+    },
+    {
+      "id": "find-duplicate",
+      "title": "Encontrar o Número Duplicado",
+      "difficulty": "avancado",
+      "statement": "O array tem `n+1` números no intervalo `[1, n]`; exatamente um se repete. Encontre-o **sem modificar** o array e em `O(1)` de espaço (ciclo de Floyd).\n\n**Exemplo:** `[1,3,4,2,2]` → `2`",
+      "starter": "class Solution {\n    static int findDuplicate(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int findDuplicate(int[] nums) {\n        int slow = nums[0], fast = nums[0];\n        do {\n            slow = nums[slow];\n            fast = nums[nums[fast]];\n        } while (slow != fast);\n        slow = nums[0];\n        while (slow != fast) { slow = nums[slow]; fast = nums[fast]; }\n        return slow;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.findDuplicate(new int[]{1,3,4,2,2}));\n        System.out.println(Solution.findDuplicate(new int[]{3,1,3,4,2}));\n        System.out.println(Solution.findDuplicate(new int[]{1,1}));\n        System.out.println(Solution.findDuplicate(new int[]{2,2,2,2,2}));\n    }\n}",
+      "hints": [
+        "Trate os valores como ponteiros (índices) — há um ciclo.",
+        "Algoritmo da tartaruga e da lebre (Floyd)."
+      ],
+      "expected": "2\n3\n1\n2"
+    },
+    {
+      "id": "first-missing-positive",
+      "title": "Primeiro Positivo Faltante",
+      "difficulty": "avancado",
+      "statement": "Retorne o menor inteiro **positivo** que não está no array. Faça em `O(n)` tempo e `O(1)` espaço extra.\n\n**Exemplo:** `[3,4,-1,1]` → `2`",
+      "starter": "class Solution {\n    static int firstMissingPositive(int[] nums) {\n        // escreva sua solução\n        return 1;\n    }\n}",
+      "reference": "class Solution {\n    static int firstMissingPositive(int[] nums) {\n        int n = nums.length;\n        for (int i = 0; i < n; i++) {\n            while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {\n                int t = nums[nums[i] - 1];\n                nums[nums[i] - 1] = nums[i];\n                nums[i] = t;\n            }\n        }\n        for (int i = 0; i < n; i++) if (nums[i] != i + 1) return i + 1;\n        return n + 1;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.firstMissingPositive(new int[]{1,2,0}));\n        System.out.println(Solution.firstMissingPositive(new int[]{3,4,-1,1}));\n        System.out.println(Solution.firstMissingPositive(new int[]{7,8,9,11,12}));\n        System.out.println(Solution.firstMissingPositive(new int[]{1}));\n    }\n}",
+      "hints": [
+        "Coloque cada número x no índice x-1 (cyclic sort).",
+        "Depois, o primeiro índice cujo valor != i+1 é a resposta."
+      ],
+      "expected": "3\n2\n1\n2"
+    },
+    {
+      "id": "search-rotated",
+      "title": "Busca em Array Rotacionado",
+      "difficulty": "avancado",
+      "statement": "Um array ordenado foi rotacionado. Encontre o índice de `alvo` em `O(log n)`, ou `-1`.\n\n**Exemplo:** `[4,5,6,7,0,1,2], alvo=0` → `4`",
+      "starter": "class Solution {\n    static int search(int[] nums, int alvo) {\n        // escreva sua solução\n        return -1;\n    }\n}",
+      "reference": "class Solution {\n    static int search(int[] nums, int alvo) {\n        int lo = 0, hi = nums.length - 1;\n        while (lo <= hi) {\n            int mid = (lo + hi) / 2;\n            if (nums[mid] == alvo) return mid;\n            if (nums[lo] <= nums[mid]) {\n                if (nums[lo] <= alvo && alvo < nums[mid]) hi = mid - 1;\n                else lo = mid + 1;\n            } else {\n                if (nums[mid] < alvo && alvo <= nums[hi]) lo = mid + 1;\n                else hi = mid - 1;\n            }\n        }\n        return -1;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.search(new int[]{4,5,6,7,0,1,2}, 0));\n        System.out.println(Solution.search(new int[]{4,5,6,7,0,1,2}, 3));\n        System.out.println(Solution.search(new int[]{1}, 0));\n        System.out.println(Solution.search(new int[]{5,1,3}, 5));\n    }\n}",
+      "hints": [
+        "Em cada passo, uma metade está ordenada. Descubra qual.",
+        "Se o alvo cai na metade ordenada, vá para lá; senão, para o outro lado."
+      ],
+      "expected": "4\n-1\n-1\n0"
+    },
+    {
+      "id": "spiral-matrix",
+      "title": "Matriz em Espiral",
+      "difficulty": "avancado",
+      "statement": "Percorra a matriz em **espiral** (horário) e retorne a lista de elementos.\n\n**Exemplo:** `[[1,2,3],[4,5,6],[7,8,9]]` → `[1, 2, 3, 6, 9, 8, 7, 4, 5]`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static List<Integer> spiralOrder(int[][] m) {\n        // escreva sua solução\n        return new ArrayList<>();\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static List<Integer> spiralOrder(int[][] m) {\n        List<Integer> res = new ArrayList<>();\n        if (m.length == 0) return res;\n        int cima = 0, baixo = m.length - 1, esq = 0, dir = m[0].length - 1;\n        while (cima <= baixo && esq <= dir) {\n            for (int j = esq; j <= dir; j++) res.add(m[cima][j]);\n            cima++;\n            for (int i = cima; i <= baixo; i++) res.add(m[i][dir]);\n            dir--;\n            if (cima <= baixo) { for (int j = dir; j >= esq; j--) res.add(m[baixo][j]); baixo--; }\n            if (esq <= dir) { for (int i = baixo; i >= cima; i--) res.add(m[i][esq]); esq++; }\n        }\n        return res;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.spiralOrder(new int[][]{{1,2,3},{4,5,6},{7,8,9}}));\n        System.out.println(Solution.spiralOrder(new int[][]{{1,2,3,4},{5,6,7,8},{9,10,11,12}}));\n        System.out.println(Solution.spiralOrder(new int[][]{{7}}));\n    }\n}",
+      "hints": [
+        "Mantenha 4 limites (cima, baixo, esq, dir) e vá fechando.",
+        "Cuidado para não revisitar linhas/colunas em matrizes não quadradas."
+      ],
+      "expected": "[1, 2, 3, 6, 9, 8, 7, 4, 5]\n[1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7]\n[7]"
+    },
+    {
+      "id": "longest-increasing-subseq",
+      "title": "Maior Subsequência Crescente (LIS)",
+      "difficulty": "avancado",
+      "statement": "Retorne o comprimento da maior subsequência **estritamente crescente** (não precisa ser contígua).\n\n**Exemplo:** `[10,9,2,5,3,7,101,18]` → `4` (`2,3,7,101`)",
+      "starter": "class Solution {\n    static int lengthOfLIS(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int lengthOfLIS(int[] nums) {\n        if (nums.length == 0) return 0;\n        int[] dp = new int[nums.length];\n        Arrays.fill(dp, 1);\n        int best = 1;\n        for (int i = 1; i < nums.length; i++) {\n            for (int j = 0; j < i; j++)\n                if (nums[j] < nums[i]) dp[i] = Math.max(dp[i], dp[j] + 1);\n            best = Math.max(best, dp[i]);\n        }\n        return best;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.lengthOfLIS(new int[]{10,9,2,5,3,7,101,18}));\n        System.out.println(Solution.lengthOfLIS(new int[]{0,1,0,3,2,3}));\n        System.out.println(Solution.lengthOfLIS(new int[]{7,7,7,7}));\n        System.out.println(Solution.lengthOfLIS(new int[]{4,10,4,3,8,9}));\n    }\n}",
+      "hints": [
+        "DP: dp[i] = maior LIS terminando em i.",
+        "dp[i] = 1 + max(dp[j]) para j < i com nums[j] < nums[i]."
+      ],
+      "expected": "4\n4\n1\n3"
+    },
+    {
+      "id": "rotate-image",
+      "title": "Rotacionar Matriz 90°",
+      "difficulty": "avancado",
+      "statement": "Rotacione a matriz `n x n` **90° no sentido horário**, in-place. Retorne a matriz.\n\n**Exemplo:** `[[1,2,3],[4,5,6],[7,8,9]]` → `[[7, 4, 1], [8, 5, 2], [9, 6, 3]]`",
+      "starter": "class Solution {\n    static int[][] rotate(int[][] m) {\n        // escreva sua solução\n        return m;\n    }\n}",
+      "reference": "class Solution {\n    static int[][] rotate(int[][] m) {\n        int n = m.length;\n        for (int i = 0; i < n; i++)\n            for (int j = i + 1; j < n; j++) {\n                int t = m[i][j]; m[i][j] = m[j][i]; m[j][i] = t;\n            }\n        for (int i = 0; i < n; i++) {\n            int l = 0, r = n - 1;\n            while (l < r) { int t = m[i][l]; m[i][l] = m[i][r]; m[i][r] = t; l++; r--; }\n        }\n        return m;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.deepToString(Solution.rotate(new int[][]{{1,2,3},{4,5,6},{7,8,9}})));\n        System.out.println(Arrays.deepToString(Solution.rotate(new int[][]{{1,2},{3,4}})));\n        System.out.println(Arrays.deepToString(Solution.rotate(new int[][]{{5}})));\n    }\n}",
+      "hints": [
+        "Transponha a matriz e depois inverta cada linha.",
+        "Transpor = trocar m[i][j] com m[j][i]."
+      ],
+      "expected": "[[7, 4, 1], [8, 5, 2], [9, 6, 3]]\n[[3, 1], [4, 2]]\n[[5]]"
+    }
+  ]
+}

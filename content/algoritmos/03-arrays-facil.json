@@ -1,0 +1,216 @@
+{
+  "intro": "16 desafios introdutórios de **arrays** em Java. Edite a classe `Solution` e clique em **Rodar testes** — o sistema compila e executa seu código contra vários casos. Foque em fazer o esqueleto sair de cabeça.",
+  "challenges": [
+    {
+      "id": "soma-array",
+      "title": "Soma do Array",
+      "difficulty": "facil",
+      "statement": "Retorne a **soma** de todos os elementos do array.\n\n**Exemplo:** `[1,2,3,4]` → `10`",
+      "starter": "class Solution {\n    static int somar(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int somar(int[] nums) {\n        int s = 0;\n        for (int n : nums) s += n;\n        return s;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.somar(new int[]{1,2,3,4}));\n        System.out.println(Solution.somar(new int[]{}));\n        System.out.println(Solution.somar(new int[]{-5,5,10}));\n        System.out.println(Solution.somar(new int[]{100}));\n        System.out.println(Solution.somar(new int[]{-1,-2,-3}));\n    }\n}",
+      "hints": [
+        "Acumule em uma variável dentro de um for-each."
+      ],
+      "expected": "10\n0\n10\n100\n-6"
+    },
+    {
+      "id": "maximo",
+      "title": "Maior Elemento",
+      "difficulty": "facil",
+      "statement": "Retorne o **maior** valor do array (sempre não vazio).\n\n**Exemplo:** `[3,7,2,9,4]` → `9`",
+      "starter": "class Solution {\n    static int maximo(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maximo(int[] nums) {\n        int max = nums[0];\n        for (int n : nums) if (n > max) max = n;\n        return max;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maximo(new int[]{3,7,2,9,4}));\n        System.out.println(Solution.maximo(new int[]{-5,-1,-9}));\n        System.out.println(Solution.maximo(new int[]{42}));\n        System.out.println(Solution.maximo(new int[]{1,1,1}));\n    }\n}",
+      "hints": [
+        "Comece assumindo que o primeiro é o maior e compare com os demais."
+      ],
+      "expected": "9\n-1\n42\n1"
+    },
+    {
+      "id": "minimo",
+      "title": "Menor Elemento",
+      "difficulty": "facil",
+      "statement": "Retorne o **menor** valor do array (sempre não vazio).\n\n**Exemplo:** `[3,7,2,9,4]` → `2`",
+      "starter": "class Solution {\n    static int minimo(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int minimo(int[] nums) {\n        int min = nums[0];\n        for (int n : nums) if (n < min) min = n;\n        return min;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.minimo(new int[]{3,7,2,9,4}));\n        System.out.println(Solution.minimo(new int[]{-5,-1,-9}));\n        System.out.println(Solution.minimo(new int[]{42}));\n        System.out.println(Solution.minimo(new int[]{8,8,8}));\n    }\n}",
+      "hints": [
+        "Igual ao máximo, mas com a comparação invertida."
+      ],
+      "expected": "2\n-9\n42\n8"
+    },
+    {
+      "id": "media",
+      "title": "Média dos Elementos",
+      "difficulty": "facil",
+      "statement": "Retorne a **média** (double) dos elementos. Para array vazio, retorne `0.0`.\n\n**Exemplo:** `[1,2,3,4]` → `2.5`",
+      "starter": "class Solution {\n    static double media(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static double media(int[] nums) {\n        if (nums.length == 0) return 0.0;\n        int s = 0;\n        for (int n : nums) s += n;\n        return (double) s / nums.length;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.media(new int[]{1,2,3,4}));\n        System.out.println(Solution.media(new int[]{2,2,2}));\n        System.out.println(Solution.media(new int[]{}));\n        System.out.println(Solution.media(new int[]{-2,2}));\n    }\n}",
+      "hints": [
+        "Cuidado com divisão inteira: faça cast para double antes de dividir."
+      ],
+      "expected": "2.5\n2.0\n0.0\n0.0"
+    },
+    {
+      "id": "inverter",
+      "title": "Inverter o Array",
+      "difficulty": "facil",
+      "statement": "Inverta a ordem dos elementos e retorne o array.\n\n**Exemplo:** `[1,2,3,4]` → `[4,3,2,1]`",
+      "starter": "class Solution {\n    static int[] inverter(int[] nums) {\n        // escreva sua solução\n        return nums;\n    }\n}",
+      "reference": "class Solution {\n    static int[] inverter(int[] nums) {\n        int i = 0, j = nums.length - 1;\n        while (i < j) {\n            int tmp = nums[i];\n            nums[i] = nums[j];\n            nums[j] = tmp;\n            i++; j--;\n        }\n        return nums;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.inverter(new int[]{1,2,3,4})));\n        System.out.println(Arrays.toString(Solution.inverter(new int[]{1,2,3,4,5})));\n        System.out.println(Arrays.toString(Solution.inverter(new int[]{42})));\n        System.out.println(Arrays.toString(Solution.inverter(new int[]{})));\n    }\n}",
+      "hints": [
+        "Two pointers: troque as pontas e caminhe para o centro."
+      ],
+      "expected": "[4, 3, 2, 1]\n[5, 4, 3, 2, 1]\n[42]\n[]"
+    },
+    {
+      "id": "contar-pares",
+      "title": "Contar Números Pares",
+      "difficulty": "facil",
+      "statement": "Conte quantos elementos são **pares**.\n\n**Exemplo:** `[1,2,3,4,6]` → `3`",
+      "starter": "class Solution {\n    static int contarPares(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int contarPares(int[] nums) {\n        int c = 0;\n        for (int n : nums) if (n % 2 == 0) c++;\n        return c;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.contarPares(new int[]{1,2,3,4,6}));\n        System.out.println(Solution.contarPares(new int[]{1,3,5}));\n        System.out.println(Solution.contarPares(new int[]{2,4,6,8}));\n        System.out.println(Solution.contarPares(new int[]{0,-2,-3}));\n    }\n}",
+      "hints": [
+        "Um número é par quando `n % 2 == 0` (vale para negativos e zero)."
+      ],
+      "expected": "3\n0\n4\n2"
+    },
+    {
+      "id": "busca-linear",
+      "title": "Busca Linear",
+      "difficulty": "facil",
+      "statement": "Retorne o **índice** da primeira ocorrência de `alvo`, ou `-1` se não existir.\n\n**Exemplo:** `[4,2,7,1], alvo=7` → `2`",
+      "starter": "class Solution {\n    static int buscar(int[] nums, int alvo) {\n        // escreva sua solução\n        return -1;\n    }\n}",
+      "reference": "class Solution {\n    static int buscar(int[] nums, int alvo) {\n        for (int i = 0; i < nums.length; i++)\n            if (nums[i] == alvo) return i;\n        return -1;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.buscar(new int[]{4,2,7,1}, 7));\n        System.out.println(Solution.buscar(new int[]{4,2,7,1}, 5));\n        System.out.println(Solution.buscar(new int[]{1,1,1}, 1));\n        System.out.println(Solution.buscar(new int[]{}, 3));\n    }\n}",
+      "hints": [
+        "Retorne assim que encontrar; se o loop terminar, retorne -1."
+      ],
+      "expected": "2\n-1\n0\n-1"
+    },
+    {
+      "id": "two-sum",
+      "title": "Two Sum",
+      "difficulty": "facil",
+      "statement": "Dado um array e um `alvo`, retorne os **índices** de dois números que somam `alvo`. Existe exatamente uma solução. Retorne `[i, j]` com `i < j`.\n\n**Exemplo:** `[2,7,11,15], alvo=9` → `[0,1]`",
+      "starter": "import java.util.*;\n\nclass Solution {\n    static int[] twoSum(int[] nums, int alvo) {\n        // escreva sua solução\n        return new int[]{-1, -1};\n    }\n}",
+      "reference": "import java.util.*;\n\nclass Solution {\n    static int[] twoSum(int[] nums, int alvo) {\n        Map<Integer, Integer> mapa = new HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int falta = alvo - nums[i];\n            if (mapa.containsKey(falta)) return new int[]{mapa.get(falta), i};\n            mapa.put(nums[i], i);\n        }\n        return new int[]{-1, -1};\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.twoSum(new int[]{2,7,11,15}, 9)));\n        System.out.println(Arrays.toString(Solution.twoSum(new int[]{3,2,4}, 6)));\n        System.out.println(Arrays.toString(Solution.twoSum(new int[]{3,3}, 6)));\n    }\n}",
+      "hints": [
+        "Guarde valor->índice num HashMap e procure `alvo - nums[i]`.",
+        "Isso resolve em O(n) em vez de O(n²)."
+      ],
+      "expected": "[0, 1]\n[1, 2]\n[0, 1]"
+    },
+    {
+      "id": "remover-duplicatas",
+      "title": "Remover Duplicatas (Array Ordenado)",
+      "difficulty": "facil",
+      "statement": "O array está **ordenado**. Remova as duplicatas in-place e retorne o **novo tamanho** (quantidade de elementos únicos).\n\n**Exemplo:** `[1,1,2]` → `2`",
+      "starter": "class Solution {\n    static int removerDuplicatas(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int removerDuplicatas(int[] nums) {\n        if (nums.length == 0) return 0;\n        int k = 1;\n        for (int i = 1; i < nums.length; i++)\n            if (nums[i] != nums[i - 1]) nums[k++] = nums[i];\n        return k;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.removerDuplicatas(new int[]{1,1,2}));\n        System.out.println(Solution.removerDuplicatas(new int[]{0,0,1,1,1,2,2,3,3,4}));\n        System.out.println(Solution.removerDuplicatas(new int[]{}));\n        System.out.println(Solution.removerDuplicatas(new int[]{1,2,3}));\n    }\n}",
+      "hints": [
+        "Use um ponteiro de escrita `k`. Como está ordenado, duplicatas são vizinhas."
+      ],
+      "expected": "2\n5\n0\n3"
+    },
+    {
+      "id": "mover-zeros",
+      "title": "Mover Zeros para o Fim",
+      "difficulty": "facil",
+      "statement": "Mova todos os zeros para o final mantendo a ordem dos demais. Retorne o array.\n\n**Exemplo:** `[0,1,0,3,12]` → `[1,3,12,0,0]`",
+      "starter": "class Solution {\n    static int[] moverZeros(int[] nums) {\n        // escreva sua solução\n        return nums;\n    }\n}",
+      "reference": "class Solution {\n    static int[] moverZeros(int[] nums) {\n        int k = 0;\n        for (int n : nums) if (n != 0) nums[k++] = n;\n        while (k < nums.length) nums[k++] = 0;\n        return nums;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.moverZeros(new int[]{0,1,0,3,12})));\n        System.out.println(Arrays.toString(Solution.moverZeros(new int[]{0,0,1})));\n        System.out.println(Arrays.toString(Solution.moverZeros(new int[]{1,2,3})));\n        System.out.println(Arrays.toString(Solution.moverZeros(new int[]{0,0,0})));\n    }\n}",
+      "hints": [
+        "Escreva primeiro os não-zeros; depois preencha o resto com zero."
+      ],
+      "expected": "[1, 3, 12, 0, 0]\n[1, 0, 0]\n[1, 2, 3]\n[0, 0, 0]"
+    },
+    {
+      "id": "rotacionar",
+      "title": "Rotacionar Array à Direita",
+      "difficulty": "facil",
+      "statement": "Rotacione o array `k` posições para a **direita**. Retorne o resultado.\n\n**Exemplo:** `[1,2,3,4,5,6,7], k=3` → `[5,6,7,1,2,3,4]`",
+      "starter": "class Solution {\n    static int[] rotacionar(int[] nums, int k) {\n        // escreva sua solução\n        return nums;\n    }\n}",
+      "reference": "class Solution {\n    static int[] rotacionar(int[] nums, int k) {\n        int n = nums.length;\n        if (n == 0) return nums;\n        k %= n;\n        int[] r = new int[n];\n        for (int i = 0; i < n; i++) r[(i + k) % n] = nums[i];\n        return r;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Arrays.toString(Solution.rotacionar(new int[]{1,2,3,4,5,6,7}, 3)));\n        System.out.println(Arrays.toString(Solution.rotacionar(new int[]{-1,-100,3,99}, 2)));\n        System.out.println(Arrays.toString(Solution.rotacionar(new int[]{1,2}, 3)));\n        System.out.println(Arrays.toString(Solution.rotacionar(new int[]{1,2,3}, 0)));\n    }\n}",
+      "hints": [
+        "O elemento do índice i vai para (i + k) % n.",
+        "Faça k %= n para evitar rotações redundantes."
+      ],
+      "expected": "[5, 6, 7, 1, 2, 3, 4]\n[3, 99, -1, -100]\n[2, 1]\n[1, 2, 3]"
+    },
+    {
+      "id": "segundo-maior",
+      "title": "Segundo Maior",
+      "difficulty": "facil",
+      "statement": "Retorne o **segundo maior valor distinto**. Há pelo menos dois valores distintos.\n\n**Exemplo:** `[3,1,4,1,5,9,2,6]` → `6`",
+      "starter": "class Solution {\n    static int segundoMaior(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int segundoMaior(int[] nums) {\n        long max1 = Long.MIN_VALUE, max2 = Long.MIN_VALUE;\n        for (int x : nums) {\n            if (x > max1) { max2 = max1; max1 = x; }\n            else if (x < max1 && x > max2) { max2 = x; }\n        }\n        return (int) max2;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.segundoMaior(new int[]{3,1,4,1,5,9,2,6}));\n        System.out.println(Solution.segundoMaior(new int[]{10,10,5}));\n        System.out.println(Solution.segundoMaior(new int[]{1,2}));\n        System.out.println(Solution.segundoMaior(new int[]{-1,-2,-3}));\n    }\n}",
+      "hints": [
+        "Mantenha o maior e o segundo maior enquanto percorre.",
+        "Ignore valores iguais ao maior atual (precisa ser distinto)."
+      ],
+      "expected": "6\n5\n1\n-2"
+    },
+    {
+      "id": "esta-ordenado",
+      "title": "Está Ordenado?",
+      "difficulty": "facil",
+      "statement": "Retorne `true` se o array está em ordem **não decrescente**.\n\n**Exemplo:** `[1,1,2,3]` → `true`; `[1,3,2]` → `false`",
+      "starter": "class Solution {\n    static boolean estaOrdenado(int[] nums) {\n        // escreva sua solução\n        return false;\n    }\n}",
+      "reference": "class Solution {\n    static boolean estaOrdenado(int[] nums) {\n        for (int i = 1; i < nums.length; i++)\n            if (nums[i] < nums[i - 1]) return false;\n        return true;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.estaOrdenado(new int[]{1,1,2,3}));\n        System.out.println(Solution.estaOrdenado(new int[]{1,3,2}));\n        System.out.println(Solution.estaOrdenado(new int[]{5}));\n        System.out.println(Solution.estaOrdenado(new int[]{}));\n        System.out.println(Solution.estaOrdenado(new int[]{3,2,1}));\n    }\n}",
+      "hints": [
+        "Compare cada elemento com o anterior; um único fora de ordem já basta."
+      ],
+      "expected": "true\nfalse\ntrue\ntrue\nfalse"
+    },
+    {
+      "id": "contar-ocorrencias",
+      "title": "Contar Ocorrências",
+      "difficulty": "facil",
+      "statement": "Conte quantas vezes `alvo` aparece no array.\n\n**Exemplo:** `[1,2,2,3,2], alvo=2` → `3`",
+      "starter": "class Solution {\n    static int contar(int[] nums, int alvo) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int contar(int[] nums, int alvo) {\n        int c = 0;\n        for (int n : nums) if (n == alvo) c++;\n        return c;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.contar(new int[]{1,2,2,3,2}, 2));\n        System.out.println(Solution.contar(new int[]{1,2,3}, 5));\n        System.out.println(Solution.contar(new int[]{7,7,7}, 7));\n        System.out.println(Solution.contar(new int[]{}, 1));\n    }\n}",
+      "hints": [
+        "Incremente um contador a cada igualdade."
+      ],
+      "expected": "3\n0\n3\n0"
+    },
+    {
+      "id": "soma-indices-pares",
+      "title": "Soma dos Índices Pares",
+      "difficulty": "facil",
+      "statement": "Some apenas os elementos cujos **índices** são pares (0, 2, 4, ...).\n\n**Exemplo:** `[1,2,3,4,5]` → `1+3+5 = 9`",
+      "starter": "class Solution {\n    static int somaIndicesPares(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int somaIndicesPares(int[] nums) {\n        int s = 0;\n        for (int i = 0; i < nums.length; i += 2) s += nums[i];\n        return s;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.somaIndicesPares(new int[]{1,2,3,4,5}));\n        System.out.println(Solution.somaIndicesPares(new int[]{10,20}));\n        System.out.println(Solution.somaIndicesPares(new int[]{}));\n        System.out.println(Solution.somaIndicesPares(new int[]{5}));\n    }\n}",
+      "hints": [
+        "Use `i += 2` no for para pular de dois em dois."
+      ],
+      "expected": "9\n10\n0\n5"
+    },
+    {
+      "id": "max-diferenca-consecutiva",
+      "title": "Maior Diferença Consecutiva",
+      "difficulty": "facil",
+      "statement": "Retorne a maior diferença **absoluta** entre elementos vizinhos. Para menos de 2 elementos, retorne `0`.\n\n**Exemplo:** `[1,5,2,9]` → diferenças `4,3,7` → `7`",
+      "starter": "class Solution {\n    static int maxDiferenca(int[] nums) {\n        // escreva sua solução\n        return 0;\n    }\n}",
+      "reference": "class Solution {\n    static int maxDiferenca(int[] nums) {\n        int m = 0;\n        for (int i = 1; i < nums.length; i++)\n            m = Math.max(m, Math.abs(nums[i] - nums[i - 1]));\n        return m;\n    }\n}",
+      "harness": "import java.util.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(Solution.maxDiferenca(new int[]{1,5,2,9}));\n        System.out.println(Solution.maxDiferenca(new int[]{3,3,3}));\n        System.out.println(Solution.maxDiferenca(new int[]{10}));\n        System.out.println(Solution.maxDiferenca(new int[]{-5,5}));\n    }\n}",
+      "hints": [
+        "Use Math.abs para a diferença e Math.max para guardar a maior."
+      ],
+      "expected": "7\n0\n0\n10"
+    }
+  ]
+}

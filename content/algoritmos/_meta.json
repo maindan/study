@@ -1,0 +1,13 @@
+{
+  "title": "Algoritmos",
+  "icon": "⚙️",
+  "order": 5,
+  "description": "Resolução de problemas em Java com foco em arrays. Padrões para memorizar e mais de 45 desafios corrigidos automaticamente, em três níveis.",
+  "sections": [
+    { "slug": "complexidade", "title": "Complexidade (Big-O)", "type": "doc", "file": "01-complexidade.md", "summary": "Como medir tempo e espaço de um algoritmo." },
+    { "slug": "padroes-arrays", "title": "Padrões de Arrays", "type": "doc", "file": "02-padroes-arrays.md", "summary": "Two pointers, sliding window, hashing, prefix sum." },
+    { "slug": "arrays-facil", "title": "Arrays — Fácil", "type": "java", "file": "03-arrays-facil.json", "summary": "16 desafios introdutórios de arrays." },
+    { "slug": "arrays-medio", "title": "Arrays — Médio", "type": "java", "file": "04-arrays-medio.json", "summary": "16 desafios intermediários de arrays." },
+    { "slug": "arrays-avancado", "title": "Arrays — Avançado", "type": "java", "file": "05-arrays-avancado.json", "summary": "15 desafios avançados de arrays." }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "Arquitetura Android",
+  "icon": "🏛️",
+  "order": 8,
+  "description": "Os blocos de construção de um app Android e como organizá-los: componentes, Intents, Manifest, padrões de arquitetura e Jetpack.",
+  "sections": [
+    { "slug": "componentes", "title": "Componentes do App", "type": "doc", "file": "01-componentes.md", "summary": "Activity, Service, BroadcastReceiver, ContentProvider." },
+    { "slug": "manifest-e-intents", "title": "Manifest e Intents", "type": "doc", "file": "02-manifest-e-intents.md", "summary": "AndroidManifest, Intents explícitos e implícitos." },
+    { "slug": "padroes-arquiteturais", "title": "Padrões Arquiteturais", "type": "doc", "file": "03-padroes-arquiteturais.md", "summary": "MVC, MVP, MVVM e Clean Architecture." },
+    { "slug": "jetpack", "title": "Android Jetpack", "type": "doc", "file": "04-jetpack.md", "summary": "ViewModel, LiveData/Flow, Room, Navigation, WorkManager." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "05-quiz.json", "summary": "Teste seus conhecimentos de arquitetura Android." }
+  ]
+}

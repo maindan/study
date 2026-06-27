@@ -1,0 +1,144 @@
+{
+  "intro": "Quiz de revisão de **Kotlin**. Cobre val/var, null safety, funções, classes e coleções. Escolha a alternativa correta.",
+  "questions": [
+    {
+      "id": "q1",
+      "q": "Qual a diferença entre `val` e `var` em Kotlin?",
+      "options": [
+        "`val` é para números e `var` para texto",
+        "`val` cria uma referência imutável (não pode ser reatribuída); `var` é mutável",
+        "São idênticos",
+        "`var` só existe dentro de funções"
+      ],
+      "answer": 1,
+      "explain": "`val` (value) cria uma referência **somente leitura**: não pode ser reatribuída depois. `var` (variable) pode ser reatribuída. A recomendação é preferir `val` sempre que possível."
+    },
+    {
+      "id": "q2",
+      "q": "Como se declara um tipo que aceita `null` em Kotlin?",
+      "options": [
+        "Adicionando `?` ao tipo, ex.: `String?`",
+        "Usando a palavra `null` antes do tipo",
+        "Todo tipo aceita null por padrão",
+        "Usando `@Nullable`"
+      ],
+      "answer": 0,
+      "explain": "Por padrão, tipos em Kotlin **não** aceitam null. Para permitir, adiciona-se `?`: `var nome: String? = null`. Isso é o coração do null safety da linguagem."
+    },
+    {
+      "id": "q3",
+      "q": "O que faz o operador `?.` (safe call)?",
+      "options": [
+        "Lança exceção se o valor for null",
+        "Acessa o membro apenas se o objeto não for null; senão retorna null",
+        "Converte para String",
+        "Sempre retorna true"
+      ],
+      "answer": 1,
+      "explain": "O safe call `?.` acessa a propriedade/método apenas se o receptor não for null; caso contrário a expressão inteira retorna `null`, evitando o NullPointerException."
+    },
+    {
+      "id": "q4",
+      "q": "O que o operador Elvis `?:` faz em `val n = texto?.length ?: 0`?",
+      "options": [
+        "Sempre atribui 0",
+        "Fornece um valor padrão (0) quando o lado esquerdo é null",
+        "Lança exceção se for null",
+        "Concatena os dois lados"
+      ],
+      "answer": 1,
+      "explain": "O operador Elvis `?:` retorna o lado esquerdo se ele não for null, ou o lado direito caso contrário. Aqui, se `texto` for null, `n` recebe `0`."
+    },
+    {
+      "id": "q5",
+      "q": "Qual coleção NÃO pode receber novos elementos após criada?",
+      "options": [
+        "mutableListOf",
+        "listOf",
+        "mutableMapOf",
+        "mutableSetOf"
+      ],
+      "answer": 1,
+      "explain": "`listOf` cria uma lista **somente leitura**, sem métodos como `add`. Para uma lista mutável, use `mutableListOf`."
+    },
+    {
+      "id": "q6",
+      "q": "O que `listOf(1, 2, 3).map { it * 2 }` retorna?",
+      "options": [
+        "[1, 2, 3]",
+        "[2, 4, 6]",
+        "12",
+        "6"
+      ],
+      "answer": 1,
+      "explain": "`map` transforma cada elemento aplicando a lambda. Dobrando cada item de `[1, 2, 3]` obtemos `[2, 4, 6]`. `it` é o parâmetro implícito da lambda."
+    },
+    {
+      "id": "q7",
+      "q": "Qual operação seleciona apenas os elementos que satisfazem uma condição?",
+      "options": ["map", "filter", "forEach", "reduce"],
+      "answer": 1,
+      "explain": "`filter` retorna uma nova coleção contendo só os elementos para os quais a lambda devolve `true`. `map` transforma, `forEach` executa ação, `reduce` combina tudo em um valor."
+    },
+    {
+      "id": "q8",
+      "q": "Qual o principal propósito de uma `data class`?",
+      "options": [
+        "Conectar ao banco de dados",
+        "Gerar automaticamente equals, hashCode, toString e copy para classes que guardam dados",
+        "Criar threads",
+        "Substituir interfaces"
+      ],
+      "answer": 1,
+      "explain": "Uma `data class` é voltada para armazenar dados. O compilador gera automaticamente `equals()`, `hashCode()`, `toString()` e `copy()` a partir das propriedades do construtor primário."
+    },
+    {
+      "id": "q9",
+      "q": "O que `find { it % 2 == 0 }` retorna em `listOf(3, 7, 4, 8)`?",
+      "options": [
+        "[4, 8]",
+        "4 (o primeiro que satisfaz)",
+        "8",
+        "true"
+      ],
+      "answer": 1,
+      "explain": "`find` retorna o **primeiro** elemento que satisfaz a condição, ou `null` se nenhum satisfizer. O primeiro par em `[3, 7, 4, 8]` é `4`."
+    },
+    {
+      "id": "q10",
+      "q": "Em Kotlin, `if` e `when` podem ser usados como:",
+      "options": [
+        "Apenas como comandos (statements)",
+        "Expressões que retornam um valor, podendo ser atribuídas a uma variável",
+        "Somente dentro de loops",
+        "Apenas com tipos booleanos"
+      ],
+      "answer": 1,
+      "explain": "Em Kotlin, `if` e `when` são **expressões**: produzem um valor. Por isso é possível escrever `val max = if (a > b) a else b`."
+    },
+    {
+      "id": "q11",
+      "q": "O que faz `groupBy { it.length }` em uma lista de strings?",
+      "options": [
+        "Ordena as strings por tamanho",
+        "Retorna um Map agrupando as strings pelo seu comprimento",
+        "Remove strings duplicadas",
+        "Conta o total de caracteres"
+      ],
+      "answer": 1,
+      "explain": "`groupBy` produz um `Map` cujas chaves são o resultado da lambda e os valores são as listas de elementos correspondentes. Aqui, agrupa as strings pelo comprimento (`length`)."
+    },
+    {
+      "id": "q12",
+      "q": "Qual a forma idiomática de declarar uma função que soma dois inteiros em uma única expressão?",
+      "options": [
+        "fun soma(a: Int, b: Int): Int { return a + b; return }",
+        "fun soma(a: Int, b: Int) = a + b",
+        "function soma(a, b) { a + b }",
+        "def soma(a, b): a + b"
+      ],
+      "answer": 1,
+      "explain": "Funções de corpo único usam a sintaxe de expressão com `=`: `fun soma(a: Int, b: Int) = a + b`. O tipo de retorno é inferido, ficando conciso e legível."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "title": "Linux",
+  "icon": "🐧",
+  "order": 1,
+  "description": "Fundamentos do Linux: sistema de arquivos, terminal, comandos essenciais, permissões e shell. Base para qualquer desenvolvedor.",
+  "sections": [
+    { "slug": "introducao", "title": "Introdução ao Linux", "type": "doc", "file": "01-introducao.md", "summary": "O que é Linux, distribuições e o terminal." },
+    { "slug": "sistema-de-arquivos", "title": "Sistema de Arquivos", "type": "doc", "file": "02-sistema-de-arquivos.md", "summary": "Estrutura de diretórios e caminhos." },
+    { "slug": "navegacao", "title": "Comandos de Navegação", "type": "linux", "file": "03-navegacao.json", "summary": "Pratique ls, cd, pwd, mkdir." },
+    { "slug": "arquivos", "title": "Manipulando Arquivos", "type": "linux", "file": "04-arquivos.json", "summary": "cp, mv, rm, cat, touch e mais." },
+    { "slug": "permissoes", "title": "Permissões e Usuários", "type": "doc", "file": "05-permissoes.md", "summary": "chmod, chown, grupos e segurança." },
+    { "slug": "busca-e-texto", "title": "Busca, Pipes e Texto", "type": "linux", "file": "06-busca-e-texto.json", "summary": "grep, find, pipes e redirecionamento." },
+    { "slug": "processos", "title": "Processos e Sistema", "type": "doc", "file": "07-processos.md", "summary": "ps, top, kill e gerenciamento de processos." },
+    { "slug": "shell-scripting", "title": "Shell Scripting", "type": "doc", "file": "08-shell-scripting.md", "summary": "Variáveis, condicionais e loops em Bash." },
+    { "slug": "quiz", "title": "Quiz de Revisão", "type": "quiz", "file": "09-quiz.json", "summary": "Teste seus conhecimentos de Linux." }
+  ]
+}
